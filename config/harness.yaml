@@ -1,0 +1,111 @@
+# Harness 全局管控配置
+
+## 基本配置
+
+```yaml
+harness:
+  name: codebuddy-harness-engineering
+  version: 1.0.0
+  description: 基于 Harness Engineering 的 AI 工程管控底座
+
+  # 全局开关
+  enabled: true
+  
+  # 审计日志
+  audit:
+    enabled: true
+    storage: assets/audit-logs/
+    retention_days: 90
+
+  # 门禁策略
+  gate:
+    # 门禁不通过时的默认行为
+    on_fail: rollback  # rollback | block | warn
+    # 最大回退次数
+    max_rollback: 3
+    # 超过回退次数后的行为
+    on_max_rollback: human_intervention  # human_intervention | auto_skip
+
+  # Agent 配置
+  agents:
+    # 全局超时（分钟）
+    default_timeout: 60
+    # 各 Agent 超时覆盖
+    timeout_overrides:
+      pm-dispatcher: 5
+      requirement-analyzer: 30
+      solution-designer: 60
+      risk-controller: 30
+      code-developer: 120
+      code-reviewer: 60
+      test-validator: 90
+
+  # Rule 约束级别
+  rule_levels:
+    L0:
+      action: terminate    # 终止流程
+      notify: [tech_lead, security]
+    L1:
+      action: rollback     # 回退修复
+      notify: [developer]
+    L2:
+      action: warn         # 标记警告
+      notify: []
+    L3:
+      action: note         # 仅记录
+      notify: []
+
+  # 测试覆盖率标准
+  coverage:
+    core_logic:
+      lines: 80
+      branches: 70
+      functions: 90
+    utility:
+      lines: 90
+      branches: 80
+      functions: 95
+    api_controller:
+      lines: 70
+      branches: 60
+      functions: 80
+    config:
+      lines: 50
+
+  # 部署策略
+  deploy:
+    staging:
+      strategy: rolling
+      auto_promote: false
+    production:
+      strategy: canary
+      canary_percentage: [10, 50, 100]
+      approval_required: true
+      auto_rollback_on_failure: true
+```
+
+## 扩展配置
+
+项目可在本文件基础上扩展自定义配置，例如：
+
+```yaml
+# 项目自定义配置示例
+harness:
+  custom:
+    # 项目特定的 Rule
+    custom_rules:
+      - rules/project-specific/naming-convention.md
+    
+    # 项目特定的 Skill
+    custom_skills:
+      - skills/custom-api-generation/
+    
+    # 项目特定的 Agent
+    custom_agents:
+      - agents/custom-devops/
+    
+    # MCP 集成
+    mcp_integrations:
+      - mcp/git-integration.md
+      - mcp/ci-cd-integration.md
+```
