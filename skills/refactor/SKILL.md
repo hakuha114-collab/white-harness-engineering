@@ -1,3 +1,7 @@
+---
+disable: true
+---
+
 # Skill: 代码重构
 
 ## 元信息

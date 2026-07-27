@@ -4,7 +4,7 @@
 
 ```yaml
 harness:
-  name: codebuddy-harness-engineering
+  name: white-harness-engineering
   version: 1.0.0
   description: 基于 Harness Engineering 的 AI 工程管控底座
 

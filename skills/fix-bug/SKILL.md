@@ -1,3 +1,7 @@
+---
+disable: true
+---
+
 # Skill: Bug 修复
 
 ## 元信息

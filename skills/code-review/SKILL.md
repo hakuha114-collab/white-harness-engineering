@@ -1,3 +1,7 @@
+---
+disable: true
+---
+
 # Skill: 代码审查
 
 ## 元信息

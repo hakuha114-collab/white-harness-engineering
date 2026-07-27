@@ -1,3 +1,7 @@
+---
+disable: true
+---
+
 # Skill: 项目初始化
 
 ## 元信息

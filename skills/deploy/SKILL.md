@@ -1,3 +1,7 @@
+---
+disable: true
+---
+
 # Skill: 部署发布
 
 ## 元信息

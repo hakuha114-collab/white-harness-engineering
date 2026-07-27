@@ -1,3 +1,7 @@
+---
+disable: true
+---
+
 # Skill: Karpathy 编程规范
 
 ## 元信息

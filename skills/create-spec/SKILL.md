@@ -1,3 +1,7 @@
+---
+disable: true
+---
+
 # Skill: 创建 SPEC 文档
 
 ## 元信息

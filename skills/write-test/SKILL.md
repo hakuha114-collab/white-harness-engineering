@@ -1,3 +1,7 @@
+---
+disable: true
+---
+
 # Skill: 编写测试用例
 
 ## 元信息
