@@ -1,4 +1,4 @@
-# CodeBuddy Harness Engineering
+# White-Harness-Engineering
 
 > **缰绳工程学 —— 让 AI Agent 在研发全流程中稳定、可控、可追溯地落地**
 
