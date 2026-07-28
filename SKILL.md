@@ -18,6 +18,7 @@ agent_created: true
 - 需要规范化代码审查、编写测试、修复 Bug、重构、部署、初始化项目时 → 用对应的子 Skill。
 - 需要跑完整研发流水线（需求→设计→风控→开发→审查→测试→交付）或专项流水线（Bug 修复 / 代码审查 / 紧急修复）时 → 用 `workflows/` 下的流水线。
 - 需要将 AI 行为约束为 7 个专业兵种（PM 调度、需求拆解、方案设计、闸门风控、开发执行、代码审查、测试验收）分工协作时 → 参考 `agents/`。
+- 需要让 AI 读取蓝湖设计稿 / 原型 / 需求文档 / 切图时 → 先按 `mcp/lanhu-mcp.md` 接入蓝湖 MCP（Lanhu MCP）。
 
 ## 目录结构（已随技能一并打包）
 
@@ -60,7 +61,7 @@ white-harness-engineering/
 ├── scripts/                  ← 自动化硬性验收门禁（逻辑校验说明）
 │   ├── check-spec/  check-code-style/  check-security/
 │   └── check-review-pass/  check-test-coverage/
-├── mcp/                      ← 外部系统接入说明（Git/CI-CD/看板/监控）
+├── mcp/                      ← 外部系统接入说明（Git/CI-CD/看板/监控/蓝湖原型）
 └── assets/                   ← 资产化沉淀（知识库/错题集/模板/dev-map）
 ```
 
