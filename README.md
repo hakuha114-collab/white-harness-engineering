@@ -99,7 +99,8 @@ codebuddy-harness-engineering/
 │   ├── git-integration.md       # Git 仓库对接
 │   ├── ci-cd-integration.md     # CI/CD 流水线对接
 │   ├── project-board.md         # 项目看板对接
-│   └── monitoring.md            # 监控告警对接
+│   ├── monitoring.md            # 监控告警对接
+│   └── lanhu-mcp.md             # 蓝湖原型对接
 └── assets/                      # 资产化沉淀
     ├── dev-map/                 # 全域工程图谱
     ├── knowledge-base/          # 知识库
