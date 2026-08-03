@@ -11,7 +11,7 @@
 - 🚧 **开发执行** → 标准化代码产出
 - 🔍 **代码审查** → 全维度质量收口
 - 🧪 **测试验收** → 自动化门禁验证
-- 📊 **项目管理** → 全链路进度追踪
+- 📊 **项目管理** → 全链路进度追踪（含项目助手 Agent 按日记录问题与进度，可同步腾讯文档）
 - 📐 **开发规范** → 刚性红线约束
 
 ## 🧠 核心理念
@@ -41,7 +41,7 @@
 | **MCP** 系统外接插座 | `mcp/` | 打通 Git/CI/测试/看板/工单等外部工具 |
 | **Assets** 资产化沉淀 | `assets/` | 规范/错题/经验/台账，长效复用迭代 |
 
-## 🤖 七大分级 Agent
+## 🤖 八大分级 Agent
 
 | Agent | 目录 | 核心职责 |
 |-------|------|----------|
@@ -52,11 +52,12 @@
 | **开发执行 Agent** | `agents/code-developer/` | 标准化落地执行，合规编写代码 |
 | **代码审查 Agent** | `agents/code-reviewer/` | 全维度校验规范/漏洞/性能/安全 |
 | **测试验收 Agent** | `agents/test-validator/` | 功能实测 + 场景兼容 + 边界压测 |
+| **项目助手 Agent** | `agents/project-recorder/` | 按日记录问题/进度/遗留，生成进程日志，可同步腾讯文档 |
 
 ## 📁 项目结构
 
 ```
-codebuddy-harness-engineering/
+white-harness-engineering/
 ├── README.md                    # 项目说明
 ├── ARCHITECTURE.md              # 架构设计文档
 ├── SPEC.md                      # 设计规格文档
@@ -83,7 +84,8 @@ codebuddy-harness-engineering/
 │   ├── risk-controller/         # 闸门风控 Agent
 │   ├── code-developer/          # 开发执行 Agent
 │   ├── code-reviewer/           # 代码审查 Agent
-│   └── test-validator/          # 测试验收 Agent
+│   ├── test-validator/          # 测试验收 Agent
+│   └── project-recorder/       # 项目助手 Agent（按日进程日志）
 ├── workflows/                   # 全链路分级指挥链条
 │   ├── full-dev-pipeline.md     # 完整研发流水线
 │   ├── bug-fix-pipeline.md      # Bug 修复流水线
@@ -107,6 +109,10 @@ codebuddy-harness-engineering/
     ├── lesson-learned/          # 踩坑经验
     └── templates/               # 标准模板库
 ```
+
+## 📋 报告与产出规范
+
+所有审查 / 评审 / 进程类产出统一以**自包含 HTML** 形式输出（浅色主题、离线可览），便于系统预览与归档；配套 `code-review` 工具支持按项目登记忽略项、动态统计，避免重复检出。
 
 ## 🚀 快速开始
 
