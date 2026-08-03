@@ -1,0 +1,134 @@
+# Agent 注册表
+
+## 已注册 Agent
+
+```yaml
+agents:
+  - id: pm-dispatcher
+    name: PM调度Agent
+    path: agents/pm-dispatcher/
+    role: 全局指挥中枢
+    status: active
+    capabilities:
+      - 任务路由
+      - 流程编排
+      - 异常处理
+      - 进度追踪
+
+  - id: requirement-analyzer
+    name: 需求拆解Agent
+    path: agents/requirement-analyzer/
+    role: 需求分析与结构化
+    status: active
+    prev: pm-dispatcher
+    next: solution-designer
+    capabilities:
+      - 需求理解
+      - 需求拆解
+      - 结构化输出
+    skills:
+      - skills/create-spec/
+    gates:
+      - scripts/check-spec/
+
+  - id: solution-designer
+    name: 方案设计Agent
+    path: agents/solution-designer/
+    role: 架构设计与方案输出
+    status: active
+    prev: requirement-analyzer
+    next: risk-controller
+    capabilities:
+      - 方案设计
+      - 架构评审
+      - 方案输出
+
+  - id: risk-controller
+    name: 闸门风控Agent
+    path: agents/risk-controller/
+    role: 开发前风险管控
+    status: active
+    prev: solution-designer
+    next: code-developer
+    capabilities:
+      - 方案核验
+      - 风险评估
+      - 前置条件检查
+
+  - id: code-developer
+    name: 开发执行Agent
+    path: agents/code-developer/
+    role: 代码开发执行
+    status: active
+    prev: risk-controller
+    next: code-reviewer
+    capabilities:
+      - 代码开发
+      - 代码自检
+      - 产出交付
+    skills:
+      - skills/karpathy-guidelines/  # 核心编程原则，所有开发任务必选
+      - skills/project-setup/
+      - skills/fix-bug/
+      - skills/refactor/
+    gates:
+      - scripts/check-code-style/
+      - scripts/check-security/
+
+  - id: code-reviewer
+    name: 代码审查Agent
+    path: agents/code-reviewer/
+    role: 代码质量守门员
+    status: active
+    prev: code-developer
+    next: test-validator
+    capabilities:
+      - 自动化检查
+      - 人工级审查
+      - 审查报告
+      - Karpathy原则合规审查
+    skills:
+      - skills/code-review/
+      - skills/karpathy-guidelines/  # 审查时必须检查Karpathy原则
+    gates:
+      - scripts/check-code-style/
+      - scripts/check-security/
+      - scripts/check-review-pass/
+
+  - id: test-validator
+    name: 测试验收Agent
+    path: agents/test-validator/
+    role: 最终质量验收
+    status: active
+    prev: code-reviewer
+    next: null
+    capabilities:
+      - 功能测试
+      - 场景兼容测试
+      - 边界压力测试
+    skills:
+      - skills/write-test/
+    gates:
+      - scripts/check-test-coverage/
+```
+
+## 注册新 Agent
+
+如需注册新 Agent，按以下格式添加：
+
+```yaml
+  - id: custom-agent-id
+    name: 自定义Agent名称
+    path: agents/custom-agent/
+    role: 职责描述
+    status: active
+    prev: 上游Agent ID
+    next: 下游Agent ID
+    capabilities:
+      - 能力1
+      - 能力2
+    skills:
+      - skills/custom-skill/
+    gates:
+      - scripts/custom-gate/
+```
