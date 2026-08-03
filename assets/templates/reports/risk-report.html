@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>闸门风控报告</title>
+<style>
+  :root{ --bg:#ffffff; --fg:#1f2328; --muted:#57606a; --border:#d0d7de;
+        --pass:#1a7f37; --warn:#9a6700; --fail:#cf222e; --block:#8250df;
+        --must:#cf222e; --should:#9a6700; --nice:#0969da; }
+  body{font-family:-apple-system,"Segoe UI","Microsoft YaHei",sans-serif;background:var(--bg);color:var(--fg);max-width:1100px;margin:0 auto;padding:24px;line-height:1.6;}
+  h1,h2,h3{margin-top:24px;}
+  .meta{color:var(--muted);font-size:14px;}
+  .banner{padding:12px 16px;border-radius:8px;font-weight:600;margin:16px 0;}
+  .banner.pass{background:#dafbe1;color:var(--pass);border:1px solid #aef0c3;}
+  .banner.fail{background:#ffebe9;color:var(--fail);border:1px solid #ffc1ba;}
+  .banner.warn{background:#fff8c5;color:var(--warn);border:1px solid #f0e6a8;}
+  table{border-collapse:collapse;width:100%;margin:12px 0;font-size:14px;}
+  th,td{border:1px solid var(--border);padding:8px 10px;text-align:left;vertical-align:top;}
+  th{background:#f6f8fa;}
+  .tag{display:inline-block;padding:1px 8px;border-radius:10px;font-size:12px;font-weight:600;color:#fff;white-space:nowrap;}
+  .tag.MUST{background:var(--must);} .tag.SHOULD{background:var(--should);} .tag.NICE{background:var(--nice);}
+  .tag.PASS{background:var(--pass);} .tag.FAIL{background:var(--fail);} .tag.WARN{background:var(--warn);} .tag.BLOCK{background:var(--block);}
+  .grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;} @media(max-width:768px){.grid{grid-template-columns:1fr;}}
+  .col{border:1px solid var(--border);border-radius:8px;padding:10px 12px;} .col-h{font-weight:600;margin:0 0 6px;}
+  pre{background:#f6f8fa;border:1px solid var(--border);border-radius:8px;padding:10px;overflow:auto;font-size:13px;}
+  code{background:#f6f8fa;padding:1px 5px;border-radius:4px;font-size:13px;}
+</style>
+</head>
+<body>
+  <h1>闸门风控报告</h1>
+  <p class="meta">任务 [ID] · 风控时间 [时间] · 执行 [risk-controller]</p>
+  <div class="banner warn">结论：有条件通过（无 L0/L1 级风险）</div>
+  <h2>核验维度</h2>
+  <table><tr><th>维度</th><th>结论</th><th>状态</th></tr>
+  <tr><td>Rule 合规（L0/L1 红线）</td><td>[结论]</td><td><span class="tag PASS">PASS</span></td></tr>
+  <tr><td>技术可行性</td><td>[结论]</td><td><span class="tag PASS">PASS</span></td></tr>
+  <tr><td>安全合规</td><td>[结论]</td><td><span class="tag PASS">PASS</span></td></tr>
+  <tr><td>禁止操作排查</td><td>[结论]</td><td><span class="tag PASS">PASS</span></td></tr></table>
+  <h2>风险清单</h2>
+  <table><tr><th>风险</th><th>级别</th><th>影响</th><th>应对措施</th></tr>
+  <tr><td>[风险]</td><td><span class="tag SHOULD">L2</span></td><td>[影响]</td><td>[应对]</td></tr></table>
+  <p class="meta">L0 级风险 = BLOCK（终止流程，人工介入）；L1 级风险 = FAIL（回退方案设计）。</p>
+</body>
+</html>

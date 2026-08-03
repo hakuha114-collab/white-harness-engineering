@@ -1,6 +1,4 @@
----
-disable: true
----
+<!-- 子资源：由主 SKILL.md 路由引用，不独立注册为技能 -->
 
 # Skill: Karpathy 编程规范
 

@@ -1,6 +1,4 @@
----
-disable: true
----
+<!-- 子资源：由主 SKILL.md 路由引用，不独立注册为技能 -->
 
 # Skill: 代码审查
 
@@ -69,7 +67,7 @@ scripts:
 
 ### Step 4: 生成 Review 报告
 
-> **按主 SKILL.md「报告输出规范」输出的 HTML 文件**（`.html`，自包含、浅色主题）。保留以下分区，使用 `<table>` + `.tag` 分级色标，问题清单优先用「问题 | 修改方案」两列 `.grid`：
+> **按分类模板 `assets/templates/reports/review-report.html` 输出的 HTML 文件**（`.html`，自包含、浅色主题）。保留以下分区，使用 `<table>` + `.tag` 分级色标，问题清单优先用「问题 | 修改方案」两列 `.grid`：
 
 - `<h1>` 标题 + 基本信息（PR / 审查人 / 审查时间）；
 - `.banner` 结论横幅：通过 / 不通过 / 有条件通过；
@@ -87,5 +85,5 @@ scripts:
 
 ### Step 6: 沉淀
 
-- 共性问题归入 `assets/lesson-learned/`
+- 共性问题归入 `assets/lesson-learned/`：按其中的落盘规范新建 `YYYY-MM-DD-问题关键词.md`（模板见该目录 README），并在经验索引表登记一行
 - 好的做法归入 `assets/knowledge-base/`

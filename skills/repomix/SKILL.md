@@ -1,3 +1,5 @@
+<!-- 子资源：由主 SKILL.md 路由引用，不独立注册为技能 -->
+
 # Skill: 代码库打包分析
 
 ## 元信息
@@ -83,7 +85,7 @@ npx repomix@latest --include "**/*.{ts,tsx,js,jsx}" --output %TEMP%/filtered-ana
 
 ### Step 5: 生成分析报告
 
-> **按主 SKILL.md「报告输出规范」输出的 HTML 文件**（`.html`）。保留以下分区：基本指标（文件数/总 Token/输出文件）、项目结构（文件树概览）、关键发现（架构模式/核心模块/潜在问题，用 `.tag` 或色标区分风险）、下一步建议。落盘建议：`reports/codebase-analysis-<日期>.html`，并在对话中预览交付。
+> **按分类模板 `assets/templates/reports/repomix-report.html` 输出的 HTML 文件**（`.html`）。保留以下分区：基本指标（文件数/总 Token/输出文件）、项目结构（文件树概览）、关键发现（架构模式/核心模块/潜在问题，用 `.tag` 或色标区分风险）、下一步建议。落盘建议：`reports/codebase-analysis-<日期>.html`，并在对话中预览交付。
 
 ## 关键选项
 

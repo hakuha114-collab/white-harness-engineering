@@ -1,5 +1,6 @@
 ---
 name: white-harness-engineering
+version: 1.2.0
 description: |
   Harness Engineering（缰绳工程学）AI 工程管控框架 —— 将 AI 辅助软件开发纳入制度化、可追溯、可规模化管控的体系。提供一整套刚性 Rule（代码/安全/审查红线、Karpathy 编程四原则）、标准化 Skill（编写 SPEC、代码审查、写测试、修 Bug、重构、部署、项目初始化）、分级 Agent 角色定义、研发流水线 Workflow 与门禁校验脚本。当需要在 AI 辅助开发时强制"先思考再编码、简洁优先、精准修改、目标驱动验证"，或需要规范化需求拆解、代码审查、测试验收、Bug 修复、重构、部署等高频流程时，应使用本技能。
 agent_created: true
@@ -59,9 +60,9 @@ white-harness-engineering/
 │   ├── bug-fix-pipeline.md
 │   ├── code-review-pipeline.md
 │   └── hotfix-pipeline.md
-├── scripts/                  ← 自动化硬性验收门禁（逻辑校验说明）
-│   ├── check-spec/  check-code-style/  check-security/
-│   └── check-review-pass/  check-test-coverage/
+├── scripts/                  ← 自动化硬性验收门禁（check-spec 已落地真实脚本，其余为逻辑校验说明）
+│   ├── check-spec/  check-design/  check-risk/
+│   └── check-code-style/  check-security/  check-review-pass/  check-test-coverage/
 ├── mcp/                      ← 外部系统接入说明（Git/CI-CD/看板/监控/蓝湖原型）
 └── assets/                   ← 资产化沉淀（知识库/错题集/模板/dev-map）
 ```
@@ -120,7 +121,7 @@ white-harness-engineering/
 ### HTML 报告硬性要求
 
 1. **自包含**：单个 `.html` 文件，内联 `<style>`，**不引用任何外部 CSS/JS/CDN/字体**，可双击离线打开。
-2. **浅色主题适配 IDE**：白底深字，颜色变量明确定义（见骨架），状态/分级用色标区分。
+2. **浅色主题适配 IDE**：白底深字，颜色变量明确定义（见模板文件），状态/分级用色标区分。
 3. **必备结构**（顺序）：
    - `<h1>` 报告标题 + 基本信息（任务 / 版本 / 时间 / 执行 Agent）；
    - **结论横幅** `.banner`：通过=绿 / 不通过=红 / 有条件通过=黄，文案与门禁一致；
@@ -128,47 +129,25 @@ white-harness-engineering/
    - 主体用 `<table>` 呈现（问题清单、验证结果、变更内容等），复杂项用「问题 | 修改方案」两列网格。
 4. 报告文件建议落盘到仓库 `deliverables/` 或对应 skill 的 `reports/` 目录，并在对话中通过预览交付。
 
-### 统一 HTML 报告骨架（各 Skill 复用，替换占位即可）
+### 统一 HTML 报告骨架与分类模板
 
-```html
-<!DOCTYPE html>
-<html lang="zh-CN">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>[报告标题]</title>
-<style>
-  :root{ --bg:#ffffff; --fg:#1f2328; --muted:#57606a; --border:#d0d7de;
-        --pass:#1a7f37; --warn:#9a6700; --fail:#cf222e; --block:#8250df;
-        --must:#cf222e; --should:#9a6700; --nice:#0969da; }
-  body{font-family:-apple-system,"Segoe UI","Microsoft YaHei",sans-serif;background:var(--bg);color:var(--fg);max-width:1100px;margin:0 auto;padding:24px;line-height:1.6;}
-  h1,h2,h3{margin-top:24px;}
-  .meta{color:var(--muted);font-size:14px;}
-  .banner{padding:12px 16px;border-radius:8px;font-weight:600;margin:16px 0;}
-  .banner.pass{background:#dafbe1;color:var(--pass);border:1px solid #aef0c3;}
-  .banner.fail{background:#ffebe9;color:var(--fail);border:1px solid #ffc1ba;}
-  .banner.warn{background:#fff8c5;color:var(--warn);border:1px solid #f0e6a8;}
-  table{border-collapse:collapse;width:100%;margin:12px 0;font-size:14px;}
-  th,td{border:1px solid var(--border);padding:8px 10px;text-align:left;vertical-align:top;}
-  th{background:#f6f8fa;}
-  .tag{display:inline-block;padding:1px 8px;border-radius:10px;font-size:12px;font-weight:600;color:#fff;}
-  .tag.MUST{background:var(--must);} .tag.SHOULD{background:var(--should);} .tag.NICE{background:var(--nice);}
-  .tag.PASS{background:var(--pass);} .tag.FAIL{background:var(--fail);} .tag.WARN{background:var(--warn);} .tag.BLOCK{background:var(--block);}
-  .grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;} @media(max-width:768px){.grid{grid-template-columns:1fr;}}
-  .col{border:1px solid var(--border);border-radius:8px;padding:10px 12px;} .col-h{font-weight:600;margin:0 0 6px;}
-</style>
-</head>
-<body>
-  <h1>[报告标题]</h1>
-  <p class="meta">基本信息：任务 [ID] · 版本 [版本] · 时间 [时间] · 执行 [Agent/Human]</p>
-  <div class="banner [pass|fail|warn]">结论：[通过 / 不通过 / 有条件通过]</div>
-  <!-- 按各 Skill 的分区填充，用 <table> + .tag 分级色标；
-       复杂清单优先用 <div class="grid"><div class="col"><h4 class="col-h">问题</h4>…</div><div class="col"><h4 class="col-h">修改方案</h4>…</div></div> -->
-</body>
-</html>
-```
+- **通用骨架**：`assets/templates/report-template.html`（任何报告均可基于它填充，勿在主文档内联维护副本）。
+- **分类模板**（`assets/templates/reports/` 下，已预置分区结构，生成报告时优先读取对应模板替换占位）：
 
-各子 Skill 在「生成 XXX 报告」步骤只需声明"按本规范的 HTML 骨架输出"，并保留原结构分区（基本信息 / 结论 / 问题清单 / 验证结果等），不再使用 ` ```markdown ` 报告模板。
+| 报告类型 | 模板文件 | 产出方 |
+|---------|---------|--------|
+| 代码审查报告 review_report | `reports/review-report.html` | code-review |
+| 覆盖率报告 coverage_report | `reports/coverage-report.html` | write-test |
+| 测试验证结果 test_results | `reports/test-results.html` | refactor / write-test |
+| Bug 修复报告 fix_report | `reports/fix-report.html` | fix-bug |
+| 重构报告 refactor_report | `reports/refactor-report.html` | refactor |
+| 部署报告 deploy_report | `reports/deploy-report.html` | deploy |
+| 项目初始化报告 setup_report | `reports/setup-report.html` | project-setup |
+| 风控报告 | `reports/risk-report.html` | risk-controller |
+| 测试验收报告 | `reports/acceptance-report.html` | test-validator |
+| 代码库分析报告（repomix） | `reports/repomix-report.html` | repomix |
+
+各子 Skill 在「生成 XXX 报告」步骤只需声明"按对应分类模板输出"，并保留原结构分区（基本信息 / 结论 / 问题清单 / 验证结果等），不再使用 ` ```markdown ` 报告模板。
 
 ## 约束层级（Rule 体系）
 
@@ -185,6 +164,12 @@ white-harness-engineering/
 4. 资产沉淀：摒弃临时会话记忆，所有产出工程化沉淀到 `assets/`。
 5. 全程追溯：每个动作、决策、变更都有迹可查。
 6. 渐进落地：按标准步骤分步搭建，无需大额成本快速落地。
+
+## 版本管理（维护者约定）
+
+- 版本号采用语义化版本（SemVer）：`主版本.次版本.修订号`。规则/门禁变更 → 次版本；模板/文档/勘误 → 修订号；架构级调整 → 主版本。
+- **三处版本号必须同步**：本文件 frontmatter 的 `version`、`config/harness.yaml` 的 `harness.version`、`CHANGELOG.md` 最新条目。
+- 每次迭代升级必须先在 `CHANGELOG.md` 追加条目（日期 + 变更清单），再提交推送。
 
 ## 参考来源
 

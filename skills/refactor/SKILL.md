@@ -1,6 +1,4 @@
----
-disable: true
----
+<!-- 子资源：由主 SKILL.md 路由引用，不独立注册为技能 -->
 
 # Skill: 代码重构
 
@@ -83,7 +81,7 @@ scripts:
 
 ### Step 5: 重构报告
 
-> **按主 SKILL.md「报告输出规范」输出的 HTML 文件**（`.html`）。保留以下分区：重构目标、重构范围（文件/影响模块）、重构手法（`<table>` 步骤/手法/说明）、验证结果（原有测试/新增测试/代码风格/性能变化，状态用 .tag 色标）。落盘建议：`reports/refactor-<日期>.html`，并在对话中预览交付。
+> **按分类模板 `assets/templates/reports/refactor-report.html` 输出的 HTML 文件**（`.html`）。保留以下分区：重构目标、重构范围（文件/影响模块）、重构手法（`<table>` 步骤/手法/说明）、验证结果（原有测试/新增测试/代码风格/性能变化，状态用 .tag 色标）。落盘建议：`reports/refactor-<日期>.html`，并在对话中预览交付。
 
 ## ⚠️ 重构红线
 

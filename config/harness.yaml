@@ -5,7 +5,7 @@
 ```yaml
 harness:
   name: white-harness-engineering
-  version: 1.0.0
+  version: 1.2.0
   description: 基于 Harness Engineering 的 AI 工程管控底座
 
   # 全局开关

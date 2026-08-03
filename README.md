@@ -43,6 +43,8 @@
 
 ## 🤖 八大分级 Agent
 
+> 说明：上文「七大核心组件」指框架的能力组件（Rule/Skill/Agent/Workflow/Scripts/MCP/Assets），此处「八大 Agent」指 Agent 组件内的 8 个专业化角色，两者是不同维度，数量并不矛盾。
+
 | Agent | 目录 | 核心职责 |
 |-------|------|----------|
 | **PM 调度 Agent** | `agents/pm-dispatcher/` | 全局统筹、任务路由、异常回退、进度兜底 |
@@ -92,7 +94,9 @@ white-harness-engineering/
 │   ├── code-review-pipeline.md  # 代码审查流水线
 │   └── hotfix-pipeline.md       # 紧急修复流水线
 ├── scripts/                     # 自动化硬性验收门禁
-│   ├── check-spec/              # SPEC 完整性校验
+│   ├── check-spec/              # SPEC 完整性校验（含已落地的 check_spec.py 真实脚本）
+│   ├── check-design/            # 设计文档完整性校验
+│   ├── check-risk/              # 风控报告校验
 │   ├── check-code-style/        # 代码风格校验
 │   ├── check-security/          # 安全合规校验
 │   ├── check-test-coverage/     # 测试覆盖率校验
@@ -112,7 +116,18 @@ white-harness-engineering/
 
 ## 📋 报告与产出规范
 
-所有审查 / 评审 / 进程类产出统一以**自包含 HTML** 形式输出（浅色主题、离线可览），便于系统预览与归档；配套 `code-review` 工具支持按项目登记忽略项、动态统计，避免重复检出。
+所有审查 / 评审 / 进程类产出统一以**自包含 HTML** 形式输出（浅色主题、离线可览），便于系统预览与归档；配套 `code-review` 工具支持按项目登记忽略项、动态统计，避免重复检出。报告骨架模板：`assets/templates/report-template.html`。
+
+## 📚 文档分工（避免重复维护）
+
+| 文档 | 定位 | 读者 |
+|------|------|------|
+| `SKILL.md` | AI 路由入口：何时用、路由表、报告规范 | AI Agent |
+| `README.md` | 项目门面：理念、组件、快速开始 | GitHub 访客 |
+| `USAGE.md` | 使用者手册：场景化使用方式 | 框架使用者 |
+| `SPEC.md` / `ARCHITECTURE.md` | 设计规格与架构 | 框架维护者 |
+
+**单一事实源约定**：意图路由表以 `SKILL.md` 为准；超时/回退数字以 `config/harness.yaml` 为准；Karpathy 原则以 `skills/karpathy-guidelines/SKILL.md` 为准；HTML 报告骨架以 `assets/templates/report-template.html` 为准。其余文档只引用、不复制。
 
 ## 🚀 快速开始
 

@@ -40,27 +40,30 @@ priority: 最高
 
 ## 路由策略
 
+> 路由关键词与 Skill 的对应关系以主入口 `SKILL.md`「按用户意图路由到对应子 Skill」表为唯一事实源，此处只定义 Agent 与流水线的承接关系。
+
 ```yaml
 routing:
   - trigger: "新需求|需求文档|功能开发"
     target: requirement-analyzer
     workflow: full-dev-pipeline
-  
+
   - trigger: "修Bug|Bug修复|问题排查"
-    target: risk-controller
+    target: code-developer        # 执行 skills/fix-bug/（先写测试复现再修复）
     workflow: bug-fix-pipeline
-  
+
   - trigger: "代码审查|review|PR审查"
     target: code-reviewer
     workflow: code-review-pipeline
-  
+
   - trigger: "紧急修复|hotfix|线上问题"
     target: code-developer
     workflow: hotfix-pipeline
-  
+
   - trigger: "重构|代码优化"
-    target: risk-controller
-    workflow: full-dev-pipeline
+    target: code-developer        # 默认轻量路径：skills/refactor/ + 覆盖率门禁
+    workflow: code-review-pipeline
+    note: 仅架构级重构（跨模块/分层调整）升级为 full-dev-pipeline，先经 risk-controller 评估
 ```
 
 ## 调度规则

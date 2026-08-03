@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>项目初始化报告</title>
+<style>
+  :root{ --bg:#ffffff; --fg:#1f2328; --muted:#57606a; --border:#d0d7de;
+        --pass:#1a7f37; --warn:#9a6700; --fail:#cf222e; --block:#8250df;
+        --must:#cf222e; --should:#9a6700; --nice:#0969da; }
+  body{font-family:-apple-system,"Segoe UI","Microsoft YaHei",sans-serif;background:var(--bg);color:var(--fg);max-width:1100px;margin:0 auto;padding:24px;line-height:1.6;}
+  h1,h2,h3{margin-top:24px;}
+  .meta{color:var(--muted);font-size:14px;}
+  .banner{padding:12px 16px;border-radius:8px;font-weight:600;margin:16px 0;}
+  .banner.pass{background:#dafbe1;color:var(--pass);border:1px solid #aef0c3;}
+  .banner.fail{background:#ffebe9;color:var(--fail);border:1px solid #ffc1ba;}
+  .banner.warn{background:#fff8c5;color:var(--warn);border:1px solid #f0e6a8;}
+  table{border-collapse:collapse;width:100%;margin:12px 0;font-size:14px;}
+  th,td{border:1px solid var(--border);padding:8px 10px;text-align:left;vertical-align:top;}
+  th{background:#f6f8fa;}
+  .tag{display:inline-block;padding:1px 8px;border-radius:10px;font-size:12px;font-weight:600;color:#fff;white-space:nowrap;}
+  .tag.MUST{background:var(--must);} .tag.SHOULD{background:var(--should);} .tag.NICE{background:var(--nice);}
+  .tag.PASS{background:var(--pass);} .tag.FAIL{background:var(--fail);} .tag.WARN{background:var(--warn);} .tag.BLOCK{background:var(--block);}
+  .grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;} @media(max-width:768px){.grid{grid-template-columns:1fr;}}
+  .col{border:1px solid var(--border);border-radius:8px;padding:10px 12px;} .col-h{font-weight:600;margin:0 0 6px;}
+  pre{background:#f6f8fa;border:1px solid var(--border);border-radius:8px;padding:10px;overflow:auto;font-size:13px;}
+  code{background:#f6f8fa;padding:1px 5px;border-radius:4px;font-size:13px;}
+</style>
+</head>
+<body>
+  <h1>项目初始化报告</h1>
+  <p class="meta">项目 [名称] · 类型 [类型] · 时间 [时间]</p>
+  <div class="banner pass">结论：初始化完成</div>
+  <h2>项目信息</h2>
+  <table><tr><th>项</th><th>内容</th></tr>
+  <tr><td>名称</td><td>[名称]</td></tr><tr><td>技术栈</td><td>[栈]</td></tr></table>
+  <h2>目录结构</h2>
+  <pre>[目录树]</pre>
+  <h2>工具链配置</h2>
+  <table><tr><th>工具</th><th>配置文件</th><th>说明</th></tr>
+  <tr><td>[lint/test/ci]</td><td>[path]</td><td>[说明]</td></tr></table>
+  <h2>Git 配置</h2>
+  <table><tr><th>项</th><th>内容</th></tr>
+  <tr><td>仓库</td><td>[url]</td></tr><tr><td>分支策略</td><td>[策略]</td></tr></table>
+  <h2>待办事项</h2>
+  <table><tr><th>#</th><th>事项</th><th>优先级</th></tr>
+  <tr><td>1</td><td>[事项]</td><td><span class="tag SHOULD">SHOULD</span></td></tr></table>
+</body>
+</html>

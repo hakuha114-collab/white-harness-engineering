@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>代码审查报告</title>
+<style>
+  :root{ --bg:#ffffff; --fg:#1f2328; --muted:#57606a; --border:#d0d7de;
+        --pass:#1a7f37; --warn:#9a6700; --fail:#cf222e; --block:#8250df;
+        --must:#cf222e; --should:#9a6700; --nice:#0969da; }
+  body{font-family:-apple-system,"Segoe UI","Microsoft YaHei",sans-serif;background:var(--bg);color:var(--fg);max-width:1100px;margin:0 auto;padding:24px;line-height:1.6;}
+  h1,h2,h3{margin-top:24px;}
+  .meta{color:var(--muted);font-size:14px;}
+  .banner{padding:12px 16px;border-radius:8px;font-weight:600;margin:16px 0;}
+  .banner.pass{background:#dafbe1;color:var(--pass);border:1px solid #aef0c3;}
+  .banner.fail{background:#ffebe9;color:var(--fail);border:1px solid #ffc1ba;}
+  .banner.warn{background:#fff8c5;color:var(--warn);border:1px solid #f0e6a8;}
+  table{border-collapse:collapse;width:100%;margin:12px 0;font-size:14px;}
+  th,td{border:1px solid var(--border);padding:8px 10px;text-align:left;vertical-align:top;}
+  th{background:#f6f8fa;}
+  .tag{display:inline-block;padding:1px 8px;border-radius:10px;font-size:12px;font-weight:600;color:#fff;white-space:nowrap;}
+  .tag.MUST{background:var(--must);} .tag.SHOULD{background:var(--should);} .tag.NICE{background:var(--nice);}
+  .tag.PASS{background:var(--pass);} .tag.FAIL{background:var(--fail);} .tag.WARN{background:var(--warn);} .tag.BLOCK{background:var(--block);}
+  .grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;} @media(max-width:768px){.grid{grid-template-columns:1fr;}}
+  .col{border:1px solid var(--border);border-radius:8px;padding:10px 12px;} .col-h{font-weight:600;margin:0 0 6px;}
+  pre{background:#f6f8fa;border:1px solid var(--border);border-radius:8px;padding:10px;overflow:auto;font-size:13px;}
+  code{background:#f6f8fa;padding:1px 5px;border-radius:4px;font-size:13px;}
+</style>
+</head>
+<body>
+  <h1>代码审查报告</h1>
+  <p class="meta">PR [编号/路径] · 审查人 [Agent/Human] · 审查时间 [时间]</p>
+  <div class="banner pass">结论：通过（无 MUST 项）</div>
+  <h2>问题清单</h2>
+  <h3><span class="tag MUST">MUST</span> 必须修复</h3>
+  <table><tr><th>文件</th><th>行号</th><th>问题描述</th><th>修改建议</th></tr>
+  <tr><td>[path]</td><td>[行]</td><td>[问题]</td><td>[建议]</td></tr></table>
+  <h3><span class="tag SHOULD">SHOULD</span> 应当修复</h3>
+  <table><tr><th>文件</th><th>行号</th><th>问题描述</th><th>修改建议</th></tr>
+  <tr><td>[path]</td><td>[行]</td><td>[问题]</td><td>[建议]</td></tr></table>
+  <h3><span class="tag NICE">NICE</span> 可选优化</h3>
+  <table><tr><th>文件</th><th>行号</th><th>问题描述</th><th>修改建议</th></tr>
+  <tr><td>[path]</td><td>[行]</td><td>[问题]</td><td>[建议]</td></tr></table>
+  <h2>亮点</h2>
+  <ul><li>[值得肯定的做法]</li></ul>
+</body>
+</html>

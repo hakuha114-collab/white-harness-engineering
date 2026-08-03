@@ -1,6 +1,4 @@
----
-disable: true
----
+<!-- 子资源：由主 SKILL.md 路由引用，不独立注册为技能 -->
 
 # Skill: 部署发布
 
@@ -82,7 +80,7 @@ scripts:
 
 ### Step 6: 发布报告
 
-> **按主 SKILL.md「报告输出规范」输出的 HTML 文件**（`.html`）。保留以下分区：发布信息、变更内容、部署过程（`<table>` 阶段/时间/状态/备注）、验证结果（冒烟/回归/监控，状态用 .tag 色标）、回滚方案。落盘建议：`reports/deploy-<版本>.html`，并在对话中预览交付。
+> **按分类模板 `assets/templates/reports/deploy-report.html` 输出的 HTML 文件**（`.html`）。保留以下分区：发布信息、变更内容、部署过程（`<table>` 阶段/时间/状态/备注）、验证结果（冒烟/回归/监控，状态用 .tag 色标）、回滚方案。落盘建议：`reports/deploy-<版本>.html`，并在对话中预览交付。
 
 ## ⚠️ 部署红线
 

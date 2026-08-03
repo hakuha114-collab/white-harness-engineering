@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>[报告标题]</title>
+<style>
+  :root{ --bg:#ffffff; --fg:#1f2328; --muted:#57606a; --border:#d0d7de;
+        --pass:#1a7f37; --warn:#9a6700; --fail:#cf222e; --block:#8250df;
+        --must:#cf222e; --should:#9a6700; --nice:#0969da; }
+  body{font-family:-apple-system,"Segoe UI","Microsoft YaHei",sans-serif;background:var(--bg);color:var(--fg);max-width:1100px;margin:0 auto;padding:24px;line-height:1.6;}
+  h1,h2,h3{margin-top:24px;}
+  .meta{color:var(--muted);font-size:14px;}
+  .banner{padding:12px 16px;border-radius:8px;font-weight:600;margin:16px 0;}
+  .banner.pass{background:#dafbe1;color:var(--pass);border:1px solid #aef0c3;}
+  .banner.fail{background:#ffebe9;color:var(--fail);border:1px solid #ffc1ba;}
+  .banner.warn{background:#fff8c5;color:var(--warn);border:1px solid #f0e6a8;}
+  table{border-collapse:collapse;width:100%;margin:12px 0;font-size:14px;}
+  th,td{border:1px solid var(--border);padding:8px 10px;text-align:left;vertical-align:top;}
+  th{background:#f6f8fa;}
+  .tag{display:inline-block;padding:1px 8px;border-radius:10px;font-size:12px;font-weight:600;color:#fff;}
+  .tag.MUST{background:var(--must);} .tag.SHOULD{background:var(--should);} .tag.NICE{background:var(--nice);}
+  .tag.PASS{background:var(--pass);} .tag.FAIL{background:var(--fail);} .tag.WARN{background:var(--warn);} .tag.BLOCK{background:var(--block);}
+  .grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;} @media(max-width:768px){.grid{grid-template-columns:1fr;}}
+  .col{border:1px solid var(--border);border-radius:8px;padding:10px 12px;} .col-h{font-weight:600;margin:0 0 6px;}
+</style>
+</head>
+<body>
+  <h1>[报告标题]</h1>
+  <p class="meta">基本信息：任务 [ID] · 版本 [版本] · 时间 [时间] · 执行 [Agent/Human]</p>
+  <div class="banner [pass|fail|warn]">结论：[通过 / 不通过 / 有条件通过]</div>
+  <!-- 按各 Skill 的分区填充，用 <table> + .tag 分级色标；
+       复杂清单优先用 <div class="grid"><div class="col"><h4 class="col-h">问题</h4>…</div><div class="col"><h4 class="col-h">修改方案</h4>…</div></div> -->
+</body>
+</html>

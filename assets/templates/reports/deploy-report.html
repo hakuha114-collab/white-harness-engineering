@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>部署发布报告</title>
+<style>
+  :root{ --bg:#ffffff; --fg:#1f2328; --muted:#57606a; --border:#d0d7de;
+        --pass:#1a7f37; --warn:#9a6700; --fail:#cf222e; --block:#8250df;
+        --must:#cf222e; --should:#9a6700; --nice:#0969da; }
+  body{font-family:-apple-system,"Segoe UI","Microsoft YaHei",sans-serif;background:var(--bg);color:var(--fg);max-width:1100px;margin:0 auto;padding:24px;line-height:1.6;}
+  h1,h2,h3{margin-top:24px;}
+  .meta{color:var(--muted);font-size:14px;}
+  .banner{padding:12px 16px;border-radius:8px;font-weight:600;margin:16px 0;}
+  .banner.pass{background:#dafbe1;color:var(--pass);border:1px solid #aef0c3;}
+  .banner.fail{background:#ffebe9;color:var(--fail);border:1px solid #ffc1ba;}
+  .banner.warn{background:#fff8c5;color:var(--warn);border:1px solid #f0e6a8;}
+  table{border-collapse:collapse;width:100%;margin:12px 0;font-size:14px;}
+  th,td{border:1px solid var(--border);padding:8px 10px;text-align:left;vertical-align:top;}
+  th{background:#f6f8fa;}
+  .tag{display:inline-block;padding:1px 8px;border-radius:10px;font-size:12px;font-weight:600;color:#fff;white-space:nowrap;}
+  .tag.MUST{background:var(--must);} .tag.SHOULD{background:var(--should);} .tag.NICE{background:var(--nice);}
+  .tag.PASS{background:var(--pass);} .tag.FAIL{background:var(--fail);} .tag.WARN{background:var(--warn);} .tag.BLOCK{background:var(--block);}
+  .grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;} @media(max-width:768px){.grid{grid-template-columns:1fr;}}
+  .col{border:1px solid var(--border);border-radius:8px;padding:10px 12px;} .col-h{font-weight:600;margin:0 0 6px;}
+  pre{background:#f6f8fa;border:1px solid var(--border);border-radius:8px;padding:10px;overflow:auto;font-size:13px;}
+  code{background:#f6f8fa;padding:1px 5px;border-radius:4px;font-size:13px;}
+</style>
+</head>
+<body>
+  <h1>部署发布报告</h1>
+  <p class="meta">版本 [版本号] · 环境 [staging/prod] · 时间 [时间]</p>
+  <div class="banner pass">结论：发布成功</div>
+  <h2>发布信息</h2>
+  <table><tr><th>项</th><th>内容</th></tr>
+  <tr><td>版本</td><td>[版本]</td></tr><tr><td>变更内容</td><td>[commit/PR 列表]</td></tr>
+  <tr><td>部署策略</td><td>[rolling/canary]</td></tr></table>
+  <h2>部署过程</h2>
+  <table><tr><th>阶段</th><th>时间</th><th>状态</th><th>备注</th></tr>
+  <tr><td>构建</td><td>[时间]</td><td><span class="tag PASS">PASS</span></td><td>[备注]</td></tr>
+  <tr><td>部署</td><td>[时间]</td><td><span class="tag PASS">PASS</span></td><td>[备注]</td></tr></table>
+  <h2>验证结果</h2>
+  <table><tr><th>验证项</th><th>结果</th><th>状态</th></tr>
+  <tr><td>冒烟测试</td><td>[结果]</td><td><span class="tag PASS">PASS</span></td></tr>
+  <tr><td>回归测试</td><td>[结果]</td><td><span class="tag PASS">PASS</span></td></tr>
+  <tr><td>监控指标</td><td>[结果]</td><td><span class="tag PASS">PASS</span></td></tr></table>
+  <h2>回滚方案</h2>
+  <p>[回滚触发条件与操作步骤]</p>
+</body>
+</html>

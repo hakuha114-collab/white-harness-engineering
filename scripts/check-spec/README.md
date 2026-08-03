@@ -1,5 +1,16 @@
 # SPEC 完整性校验脚本
 
+## 可执行脚本（已落地）
+
+本门禁已实现为真实可执行脚本：**`check_spec.py`**（仅依赖 Python 标准库）。
+
+```bash
+python check_spec.py <spec_doc.md>          # 文本输出，exit 0=PASS / 2=WARN / 1=FAIL
+python check_spec.py <spec_doc.md> --json   # JSON 输出（对接 CI / 流水线）
+```
+
+当前覆盖的自动化校验：必需章节存在性、验收标准可量化特征、功能优先级标注、歧义表述扫描。其余校验项（如无歧义深度语义判断）仍由 AI 按下方校验项表做逻辑核验。
+
 ## 校验说明
 
 对需求拆解 Agent 产出的 SPEC 文档进行完整性校验，确保文档达到可交付标准。

@@ -1,34 +1,45 @@
 # 使用指南
 
-> 本文档说明如何将 codebuddy-harness-engineering 应用到实际 AI 辅助软件开发中。
+> 本文档说明如何将 white-harness-engineering 应用到实际 AI 辅助软件开发中。
 
 ---
 
 ## 一、快速上手（3 分钟）
 
-### 方式 A：在 CodeBuddy 中打开本工程
+### 方式 A：用户级技能自动触发（推荐，零配置）
+
+本技能安装为用户级技能（`~/.workbuddy/skills/white-harness-engineering`）后，**在任意工作区对话中意图匹配即自动加载**，无需任何路径配置：
 
 ```
-打开 CodeBuddy
+打开 CodeBuddy / WorkBuddy
   ↓
-选择工作目录：F:\code\codebuddy-harness-engineering
+进入你的项目工作区
   ↓
-在对话框中直接下达开发任务
+直接下达开发任务（如"帮我开发一个登录功能"）
   ↓
-AI 会自动读取 rules/ 和 skills/ 中的约束
+AI 自动加载本技能的 Rule 约束与对应子 Skill
 ```
 
-**关键**：把本工程目录作为工作区打开后，AI 能直接读取所有 Rule 和 Skill 文件，无需额外配置。
+也可以显式强制加载：
 
-### 方式 B：在任何项目中引用本工程规范
+```
+请按 Harness Engineering 规范 / Karpathy 四原则执行本次任务，先输出思考文档。
+```
 
-在任意项目的对话框中告诉 AI：
+### 方式 B：把技能仓库作为工作区打开
+
+将本技能源码仓库作为工作区打开后，AI 能直接读取所有 Rule 和 Skill 文件，适合需要**修改框架本身**（补充红线、扩展子 Skill）的场景。
+
+### 方式 C：跨项目显式引用单个规范文件
+
+在任意项目的对话框中引用技能内的相对路径（以实际安装位置为根）：
 
 ```
 请按以下规范执行本次任务：
-- 编程原则：参考 F:\code\codebuddy-harness-engineering\rules\karpathy-guidelines.md
-- 代码规范：参考 F:\code\codebuddy-harness-engineering\rules\coding-standards.md
-- 安全规范：参考 F:\code\codebuddy-harness-engineering\rules\security-rules.md
+- 编程原则：参考 rules/karpathy-guidelines.md（红线清单）
+- 执行细则：参考 skills/karpathy-guidelines/SKILL.md
+- 代码规范：参考 rules/coding-standards.md
+- 安全规范：参考 rules/security-rules.md
 ```
 
 ---
@@ -85,7 +96,7 @@ AI 会自动读取 rules/ 和 skills/ 中的约束
 ```
 
 **AI 会自动**：
-1. 读取 `rules/karpathy-guidelines.md` → 执行四原则
+1. 读取 `skills/karpathy-guidelines/SKILL.md` → 执行四原则
 2. 读取 `skills/create-spec/SKILL.md` → 输出 SPEC
 3. 读取 `rules/coding-standards.md` → 按规范编码
 4. 读取 `skills/code-review/SKILL.md` → 自我审查
@@ -115,7 +126,7 @@ Bug 描述：
 ### 场景 3：代码审查
 
 ```
-请审查这段代码，按 review-checklist.md 和 karpathy-guidelines.md 执行。
+请审查这段代码，按 review-checklist.md 和 karpathy 四原则执行。
 
 [粘贴代码或提供文件路径]
 ```
@@ -124,7 +135,7 @@ Bug 描述：
 1. 运行 `scripts/check-code-style/` 逻辑检查风格
 2. 运行 `scripts/check-security/` 逻辑检查安全
 3. 按 Karpathy 四原则检查代码质量
-4. 输出分级审查报告
+4. 输出分级审查报告（HTML）
 
 ---
 
@@ -132,7 +143,7 @@ Bug 描述：
 
 ```
 请重构 src/services/user-service.ts，
-按 karpathy-guidelines 的简洁优先原则执行，
+按 karpathy 的简洁优先原则执行，
 重构前先确认测试覆盖率达标。
 ```
 
@@ -147,30 +158,29 @@ Bug 描述：
 
 ### 自动生效（推荐）
 
-将 `F:\code\codebuddy-harness-engineering` 作为 CodeBuddy 工作区打开后，AI 会自动读取：
+作为用户级技能安装后，意图匹配时 AI 自动读取：
 
 ```
+rules/karpathy-guidelines.md → 编码前红线检查（细则见 skills/karpathy-guidelines/）
 rules/coding-standards.md    → 编码时自动遵守
 rules/security-rules.md      → 编码时自动检查
-rules/karpathy-guidelines.md → 编码前自动执行四原则
 rules/review-checklist.md    → 审查时自动核对
-rules/prohibited-actions.md → 自动规避禁止操作
+rules/prohibited-actions.md  → 自动规避禁止操作
 ```
 
-### 手动引用（跨项目使用）
+### 手动引用（强制加载）
 
-在任何对话框中显式引用：
+在任何对话框中显式要求：
 
 ```
-请按 F:\code\codebuddy-harness-engineering\rules\karpathy-guidelines.md
-中的四原则执行本次任务，先输出思考文档。
+请按 Karpathy 四原则执行本次任务，先输出思考文档。
 ```
 
 ---
 
 ## 五、Skills 如何触发
 
-Skills 通过关键词自动触发，无需手动调用：
+Skills 通过关键词自动触发，无需手动调用。**路由对应关系以主入口 `SKILL.md`「按用户意图路由到对应子 Skill」表为唯一事实源**，摘要如下：
 
 | 你说的话 | 自动触发的 Skill |
 |-----------|---------------------|
@@ -217,32 +227,34 @@ AI 自动运行 check-security 逻辑（对照 rules/security-rules.md）
 有 MUST 级问题 → 自动修复或提示你确认
 ```
 
-**目前门禁是"逻辑校验"**（AI 读规则后自查），后续可升级为"自动化脚本校验"（接入 ESLint、pytest 等真实工具）。
+**门禁分两级实现**：
+- **可执行脚本**：`scripts/check-spec/check_spec.py` 已落地为真实 Python 脚本，可直接运行机器校验；
+- **逻辑校验**：其余门禁当前为 AI 读规则后自查（各 `scripts/check-*/README.md` 描述了校验项与伪代码），后续可同样升级为真实脚本（接入 ESLint、pytest 等工具）。
 
 ---
 
 ## 八、推荐的工作区配置
 
-### 单工作区模式（简单项目）
+### 单工作区模式（推荐，默认）
 
 ```
-CodeBuddy 工作区 = 你的项目目录
+CodeBuddy / WorkBuddy 工作区 = 你的项目目录
   ↓
-在对话框中引用 Harness 规范路径
+技能作为用户级技能自动生效，无需额外配置
 ```
 
-### 双工作区模式（推荐）
+### 双工作区模式（需要修改框架本身时）
 
 ```
-CodeBuddy 工作区 1：F:\code\codebuddy-harness-engineering（规范库）
-CodeBuddy 工作区 2：你的实际项目（开发目录）
+工作区 1：本技能源码仓库（规范库）
+工作区 2：你的实际项目（开发目录）
   ↓
 AI 可以同时读取两个工作区的文件
 ```
 
 ---
 
-## 九、效查清单
+## 九、效果检查清单
 
 使用本框架后，你应该能看到这些改善：
 
@@ -259,10 +271,10 @@ AI 可以同时读取两个工作区的文件
 
 | 阶段 | 做什么 | 效果 |
 |------|--------|------|
-| 现在 | 用 `.md` 规范约束 AI | AI 读规则后自查，70% 效果 |
-| 下一步 | 把 Scripts 落地为真实可执行脚本（ESLint 配置、pytest 等） | 自动化校验，90% 效果 |
+| 现在 | 用 `.md` 规范约束 AI + check-spec 真实脚本 | AI 读规则后自查，SPEC 门禁已机器化，75% 效果 |
+| 下一步 | 其余 Scripts 落地为真实可执行脚本（ESLint 配置、pytest 等） | 自动化校验，90% 效果 |
 | 再下一步 | 搭建 Orchestrator 引擎，自动调度 Agent 和门禁 | 全自动流水线，100% 效果 |
 
 ---
 
-**快速开始**：打开 CodeBuddy → 选择工作区 `F:\code\codebuddy-harness-engineering` → 输入"按 Karpathy 四原则帮我开发一个 XX 功能，先输出思考文档" → 开始体验。
+**快速开始**：进入任意项目工作区 → 输入"按 Karpathy 四原则帮我开发一个 XX 功能，先输出思考文档" → 开始体验。

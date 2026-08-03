@@ -1,6 +1,4 @@
----
-disable: true
----
+<!-- 子资源：由主 SKILL.md 路由引用，不独立注册为技能 -->
 
 # Skill: 创建 SPEC 文档
 

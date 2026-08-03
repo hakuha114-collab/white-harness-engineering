@@ -1,6 +1,4 @@
----
-disable: true
----
+<!-- 子资源：由主 SKILL.md 路由引用，不独立注册为技能 -->
 
 # Skill: Bug 修复
 
@@ -86,9 +84,9 @@ scripts:
 
 ### Step 6: 生成修复报告
 
-> **按主 SKILL.md「报告输出规范」输出的 HTML 文件**（`.html`）。保留以下分区：Bug 信息（ID/严重程度/影响范围）、根因分析（现象/根因/5-Why 记录）、修复方案（方式/范围/风险评估）、验证结果（回归/原有/手动，状态用 .tag 色标）。落盘建议：`reports/fix-<Bug ID>.html`，并在对话中预览交付。
+> **按分类模板 `assets/templates/reports/fix-report.html` 输出的 HTML 文件**（`.html`）。保留以下分区：Bug 信息（ID/严重程度/影响范围）、根因分析（现象/根因/5-Why 记录）、修复方案（方式/范围/风险评估）、验证结果（回归/原有/手动，状态用 .tag 色标）。落盘建议：`reports/fix-<Bug ID>.html`，并在对话中预览交付。
 
 ### Step 7: 沉淀
 
-- Bug 根因归入 `assets/lesson-learned/`
+- Bug 根因归入 `assets/lesson-learned/`：按其中的落盘规范新建 `YYYY-MM-DD-问题关键词.md`（模板见该目录 README），并在经验索引表登记一行
 - 同类隐患排查建议归入 `assets/knowledge-base/`
