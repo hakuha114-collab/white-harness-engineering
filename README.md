@@ -2,6 +2,10 @@
 
 > **缰绳工程学 —— 让 AI Agent 在研发全流程中稳定、可控、可追溯地落地**
 
+![version](https://img.shields.io/badge/version-1.2.0-blue) ![license](https://img.shields.io/badge/license-MIT-green) ![clients](https://img.shields.io/badge/clients-Codex%20%7C%20WorkBuddy-purple)
+
+> **当前版本：v1.2.0** —— 版本号在 `SKILL.md` frontmatter、`config/harness.yaml`、`CHANGELOG.md` 三处强制同步；每次迭代先写 `CHANGELOG.md` 再提交。完整变更见 [CHANGELOG.md](./CHANGELOG.md)。
+
 ## 🎯 项目定位
 
 基于 Harness Engineering 理念搭建的企业级 AI 工程管控底座。覆盖公司全部软件开发环节：
@@ -145,13 +149,47 @@ white-harness-engineering/
 | 6 | 规模化阶段，上线 dev-map + 任务看板 | 全局可视 |
 | 7 | 需联动外部工具时，接入 MCP 通用接口 | 打通全域系统 |
 
-### 使用方式
+### 使用方式（支持 Codex / WorkBuddy）
 
-1. 在 CodeBuddy 中引入本项目作为 AI 工程底座
-2. 根据实际项目需求，修改 `config/harness.yaml` 配置
-3. 在 `rules/` 中补充项目特有的红线规则
-4. 在 `skills/` 中扩展团队高频操作流程
-5. 在 `agents/` 中激活并定制所需 Agent
+本仓库的 `SKILL.md` 采用 **Open Agent Skills** 通用格式（YAML frontmatter + 渐进式披露），Codex CLI、WorkBuddy、Claude Code、Gemini CLI 等兼容客户端可直接复用，无需改写。
+
+#### 🅰 WorkBuddy（用户级技能，按场景自动触发）
+
+```bash
+# 安装到用户级技能目录（所有对话自动可用）
+git clone https://github.com/hakuha114-collab/white-harness-engineering.git \
+  ~/.workbuddy/skills/white-harness-engineering
+```
+
+- 对话中通过 `@skill:white-harness-engineering` 显式引用
+- 或在自定义指令里配置「软件研发 / 需求分析 / 代码测试 / 项目管理均使用此技能」，让它按场景自动触发
+- 仅对单项目生效时，克隆到 `<项目>/.workbuddy/skills/white-harness-engineering`
+
+#### 🅱 Codex CLI（Open Agent Skills 标准）
+
+```bash
+# 方式一：用户级（推荐，所有仓库可用）
+git clone https://github.com/hakuha114-collab/white-harness-engineering.git \
+  ~/.agents/skills/white-harness-engineering
+
+# 方式二：仓库级（随仓库提交，团队共享）
+mkdir -p .agents/skills && git clone https://github.com/hakuha114-collab/white-harness-engineering.git \
+  .agents/skills/white-harness-engineering
+
+# 方式三：Skills CLI 一键安装
+npx skills add hakuha114-collab/white-harness-engineering -a codex
+```
+
+- 触发：在 Codex 会话中输入 `$white-harness-engineering` 显式调用，或描述「写 SPEC / 代码审查 / 修 Bug / 重构」等任务，Codex 按 `SKILL.md` 的 `description` 隐式匹配
+- 新装技能后重启 Codex 以加载；`/skills` 可查看已安装技能列表
+- 个别技能可在 `~/.codex/config.toml` 中关闭
+
+### 按需裁剪（通用）
+
+- 改 `config/harness.yaml` 适配实际项目管控参数
+- 在 `rules/` 补充项目特有的红线规则
+- 在 `skills/` 扩展团队高频操作流程
+- 在 `agents/` 激活并定制所需 Agent
 
 ## 📐 设计原则
 
