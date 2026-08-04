@@ -1,8 +1,8 @@
 ---
 name: white-harness-engineering
-version: 1.2.0
+version: 1.2.1
 description: |
-  Harness Engineering（缰绳工程学）AI 工程管控框架 —— 将 AI 辅助软件开发纳入制度化、可追溯、可规模化管控的体系。提供一整套刚性 Rule（代码/安全/审查红线、Karpathy 编程四原则）、标准化 Skill（编写 SPEC、代码审查、写测试、修 Bug、重构、部署、项目初始化）、分级 Agent 角色定义、研发流水线 Workflow 与门禁校验脚本。当需要在 AI 辅助开发时强制"先思考再编码、简洁优先、精准修改、目标驱动验证"，或需要规范化需求拆解、代码审查、测试验收、Bug 修复、重构、部署等高频流程时，应使用本技能。
+  AI 研发全流程工程管控框架（缰绳工程学）。触发：写/审 SPEC、代码审查、写测试、修 Bug、重构、部署、项目初始化，或需强制 AI 开发遵循"先思考再编码、简洁优先、精准修改、目标驱动验证"刚性规范。含刚性 Rule、标准化 Skill、分级 Agent、流水线与门禁脚本。不用于纯问答或闲聊。
 agent_created: true
 ---
 

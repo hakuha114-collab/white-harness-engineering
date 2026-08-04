@@ -2,6 +2,14 @@
 
 本文件记录 white-harness-engineering 的版本演进，遵循「全程追溯」原则。
 
+## [1.2.1] - 2026-08-04
+
+### 优化
+
+- 精简 `SKILL.md` 的 `description`（281 字 → 150 字，降约 47%），触发词前置并补充「何时不触发」边界，提升 Codex 等兼容客户端的隐式匹配准确率与渐进式披露（progressive disclosure）效率
+- README 顶部补版本徽章（version / license / clients）与版本三处同步说明，并打 `v1.2.0` 标签，使版本号在 GitHub Tags/Releases 可见
+- README「使用方式」由 CodeBuddy 改为 Codex + WorkBuddy 双客户端安装与触发（Codex 走 `~/.agents/skills/` 或 `npx skills add`）
+
 ## [1.2.0] - 2026-08-03
 
 ### 新增
