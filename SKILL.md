@@ -1,6 +1,6 @@
 ---
 name: white-harness-engineering
-version: 1.2.1
+version: 1.2.2
 description: |
   AI 研发全流程工程管控框架（缰绳工程学）。触发：写/审 SPEC、代码审查、写测试、修 Bug、重构、部署、项目初始化，或需强制 AI 开发遵循"先思考再编码、简洁优先、精准修改、目标驱动验证"刚性规范。含刚性 Rule、标准化 Skill、分级 Agent、流水线与门禁脚本。不用于纯问答或闲聊。
 agent_created: true

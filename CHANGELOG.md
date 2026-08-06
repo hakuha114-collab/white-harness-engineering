@@ -2,6 +2,18 @@
 
 本文件记录 white-harness-engineering 的版本演进，遵循「全程追溯」原则。
 
+## [1.2.2] - 2026-08-06
+
+### 优化（减法审计落地，对照《模型越来越强，harness 该留下什么？》）
+
+- rules 去重：`prohibited-actions.md` 改为分级索引，具体红线以 `security-rules.md` / `coding-standards.md` 为 SSOT，消除逐条双写漂移（A1/A2）
+- 沉降工具层：`security-rules.md` / `coding-standards.md` 顶部明确「以 `scripts/check-security` / `check-code-style` 为准，违反即拦截」，指令层不再重复列清单（D1/D2）
+- 穷举禁令改判据：命名法改为引用语言官方 style guide；函数/类/文件尺寸、依赖、结构复杂度改为可读性/单一职责判据；保留「禁止直推 main」与 commit 意图判据（B3/B5/B6/F1）
+- 删 L0 公开知识：基础安全常识（HTTPS/密码加密/参数化查询）与命名风格法收敛为判据，不再逐条复述（F2）
+- 示例→接口：review-checklist 安全/性能项改为判据+引用 SSOT；project-recorder 记录 schema 由完整样例改为字段枚举；ARCHITECTURE 的 yaml 示例标注为「参考性」（C1/C2/C3）
+- 删冗余安全条目：容器/网络/最小权限/RBAC/Session 等平台默认或 L0 常识收敛为判据（E1-E4）
+- README 版本标注补同步（V1，此前漏改）
+
 ## [1.2.1] - 2026-08-04
 
 ### 优化

@@ -2,9 +2,9 @@
 
 > **缰绳工程学 —— 让 AI Agent 在研发全流程中稳定、可控、可追溯地落地**
 
-![version](https://img.shields.io/badge/version-1.2.0-blue) ![license](https://img.shields.io/badge/license-MIT-green) ![clients](https://img.shields.io/badge/clients-Codex%20%7C%20WorkBuddy-purple)
+![version](https://img.shields.io/badge/version-1.2.2-blue) ![license](https://img.shields.io/badge/license-MIT-green) ![clients](https://img.shields.io/badge/clients-Codex%20%7C%20WorkBuddy-purple)
 
-> **当前版本：v1.2.0** —— 版本号在 `SKILL.md` frontmatter、`config/harness.yaml`、`CHANGELOG.md` 三处强制同步；每次迭代先写 `CHANGELOG.md` 再提交。完整变更见 [CHANGELOG.md](./CHANGELOG.md)。
+> **当前版本：v1.2.2** —— 版本号在 `SKILL.md` frontmatter、`config/harness.yaml`、`CHANGELOG.md` 三处强制同步；每次迭代先写 `CHANGELOG.md` 再提交。完整变更见 [CHANGELOG.md](./CHANGELOG.md)。
 
 ## 🎯 项目定位
 

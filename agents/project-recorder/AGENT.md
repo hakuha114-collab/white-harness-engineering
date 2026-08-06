@@ -53,42 +53,15 @@ next_agent: null
 | 会话问答 / handover 消息 | 归集待确认(CLARIFY)、阻塞(BLOCK)、需求歧义 |
 | 忽略清单（ignore-registry.json） | 标注"已决定忽略、不再复检"项，避免重复计入遗留 |
 
-## 记录条目 schema（建议）
+## 记录条目字段（判据式枚举）
 
-```json
-{
-  "date": "2026-07-31",
-  "project": "smartlink-ai-business",
-  "items": [
-    {
-      "id": "Q-001",
-      "type": "CLARIFY | BLOCK | TODO | OPEN | REVIEW",
-      "phase": "需求 | 研发 | 测试 | 评审",
-      "title": "原型说明不清楚：红线下方『仅查看深度使用』控件形态未明确",
-      "detail": "蓝湖文本为『仅查看 深度使用：每日两次及以上会话』，无独立 checkbox 标题；前端未实现对应开关（P5-002）",
-      "owner": "齐活林",
-      "status": "OPEN | RESOLVED | IGNORED",
-      "ref": "code-review/reports/...html#P5-002",
-      "created": "2026-07-30",
-      "resolved": ""
-    }
-  ],
-  "metrics": {
-    "code_commits": 4,
-    "code_files": 12,
-    "review_rounds": 2,
-    "review_pass": false,
-    "test_cases": 0,
-    "test_pass_rate": ""
-  },
-  "progress": {
-    "requirement": "90%",
-    "dev": "70%",
-    "test": "40%",
-    "review": "不通过(2 MUST 遗留)"
-  }
-}
-```
+每条记录须含以下字段（类型见枚举，不必逐字套用样例值；完整字段契约见主 SKILL.md 报告规范）：
+
+- `date`（必填）：自然日 `YYYY-MM-DD`
+- `project`（必填）：关联项目名
+- `items[]`：问题 / 待确认 / 遗留条目数组；每项 `type ∈ {CLARIFY, BLOCK, TODO, OPEN, REVIEW}`、`phase ∈ {需求, 研发, 测试, 评审}`、`status ∈ {OPEN, RESOLVED, IGNORED}`
+- `metrics`（可选）：当日量化产出（如 `code_commits` / `code_files` / `review_rounds` / `test_cases` / `test_pass_rate` 等数值字段）
+- `progress`（可选）：各阶段完成度百分比（`requirement` / `dev` / `test` / `review`）
 
 ## 每日进程日志模板（HTML）
 
