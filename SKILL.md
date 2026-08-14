@@ -1,6 +1,6 @@
 ---
 name: white-harness-engineering
-version: 2.0.0
+version: 2.0.1
 description: AI 研发全流程工程管控框架。触发：写/审 SPEC、代码审查、写测试、修 Bug、重构、部署、项目初始化，或需强制 AI 开发遵循先思考再编码、简洁优先、精准修改、目标驱动验证。v2.0.0 增加 Executable Graph、TaskState、Evidence Gate、Clean-context Reviewer、Policy YAML 和项目记忆。
 agent_created: true
 ---

@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.0.1] - 2026-08-14
+
+### Changed
+
+- README 全面中文化：保留 1.x 整体介绍（项目定位/核心理念/Vibe vs Harness 对比/七大组件/八大 Agent/设计原则/文档分工），合并 v2.0 变更说明（Runtime/TaskState/Evidence Gate/动态路由/人工审批策略），目录树补齐英文版遗漏的 `skills/`、`mcp/` 与全部 8 个 Agent
+- 版本三处同步 2.0.0 → 2.0.1（文档修订号）
+
 ## [2.0.0] - 2026-08-14
 
 ### Added
