@@ -1,0 +1,54 @@
+{
+  "version": "2.0.0",
+  "principle": "No Evidence, No Pass",
+  "exit_codes": {
+    "PASS": 0,
+    "FAIL": 1,
+    "WARN": 2,
+    "BLOCK": 3
+  },
+  "gates": {
+    "check-spec": {
+      "script": "scripts/check-spec/check_spec.py",
+      "required_evidence": ["spec_doc"],
+      "rollback_to": "requirement"
+    },
+    "check-design": {
+      "script": "scripts/check-design/check_design.py",
+      "required_evidence": ["design_doc", "spec_doc"],
+      "rollback_to": "design"
+    },
+    "check-risk": {
+      "script": "scripts/check-risk/check_risk.py",
+      "required_evidence": ["risk_report"],
+      "block_on": ["L0", "unapproved_side_effect"],
+      "rollback_to": "design"
+    },
+    "check-code-style": {
+      "script": "scripts/check-code-style/check_code_style.py",
+      "required_evidence": ["changed_files", "git_diff_check"],
+      "rollback_to": "implement"
+    },
+    "check-security": {
+      "script": "scripts/check-security/check_security.py",
+      "required_evidence": ["changed_files", "security_scan"],
+      "block_on": ["hardcoded_secret"],
+      "rollback_to": "implement"
+    },
+    "check-review-pass": {
+      "script": "scripts/check-review-pass/check_review_pass.py",
+      "required_evidence": ["clean_context_review_report", "diff", "test_evidence"],
+      "rollback_to": "implement"
+    },
+    "check-test-coverage": {
+      "script": "scripts/check-test-coverage/check_test_coverage.py",
+      "required_evidence": ["coverage_json", "test_results"],
+      "rollback_to": "implement"
+    },
+    "check-knowledge-stale": {
+      "script": "scripts/check-knowledge-stale/check_knowledge_stale.py",
+      "required_evidence": ["wiki_manifest"],
+      "rollback_to": "project-recorder"
+    }
+  }
+}

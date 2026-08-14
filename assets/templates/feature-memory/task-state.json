@@ -1,0 +1,26 @@
+{
+  "schema_version": "2.0.0",
+  "task_id": "{{TASK_ID}}",
+  "goal": "{{GOAL}}",
+  "workflow_id": "feature",
+  "current_node": "start",
+  "status": "READY",
+  "risk_level": "normal",
+  "artifacts": {},
+  "evidence": {},
+  "subtasks": [],
+  "rollback_count": 0,
+  "human_approvals": [],
+  "budget": {
+    "max_tokens": 150000,
+    "max_tool_calls": 100,
+    "max_rollbacks": 3,
+    "max_wall_minutes": 240
+  },
+  "audit": {
+    "created_at": "{{UTC_NOW}}",
+    "updated_at": "{{UTC_NOW}}",
+    "trace": "timeline.ndjson",
+    "checkpoint_dir": "checkpoints"
+  }
+}

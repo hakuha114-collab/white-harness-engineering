@@ -1,0 +1,13 @@
+[
+  {
+    "id": "M1",
+    "title": "Replace with a concrete implementation milestone",
+    "type": "backend|frontend|test|docs|ops",
+    "depends_on": [],
+    "files": [],
+    "acceptance": [
+      "Replace with measurable acceptance criteria"
+    ],
+    "status": "TODO"
+  }
+]

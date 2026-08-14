@@ -1,0 +1,14 @@
+{
+  "version": "2.0.0",
+  "level": "L3",
+  "mappings": [
+    {
+      "business_term": "example capability",
+      "code_symbols": ["src/example"],
+      "api_routes": [],
+      "ui_components": [],
+      "data_entities": [],
+      "wiki": "assets/project-wiki/modules/example.md"
+    }
+  ]
+}

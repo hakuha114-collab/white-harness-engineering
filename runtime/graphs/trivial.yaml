@@ -1,0 +1,19 @@
+{
+  "id": "trivial",
+  "version": "2.0.0",
+  "description": "Minimal graph for low-risk docs, typo, and tiny config work.",
+  "nodes": {
+    "start": {"agent": "pm-dispatcher", "checkpoint": true},
+    "implement": {"agent": "code-developer", "checkpoint": true},
+    "style_gate": {"gate": "check-code-style"},
+    "deliver": {"agent": "project-recorder", "checkpoint": true}
+  },
+  "edges": [
+    {"from": "start", "on": "PASS", "to": "implement"},
+    {"from": "implement", "on": "PASS", "to": "style_gate"},
+    {"from": "style_gate", "on": "PASS", "to": "deliver"},
+    {"from": "style_gate", "on": "WARN", "to": "deliver"},
+    {"from": "style_gate", "on": "FAIL", "to": "implement"},
+    {"from": "deliver", "on": "PASS", "to": "done"}
+  ]
+}

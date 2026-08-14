@@ -1,0 +1,28 @@
+{
+  "version": "2.0.0",
+  "router": {
+    "default": "normal",
+    "rules": [
+      {
+        "id": "high-risk-side-effect",
+        "when": {"side_effects_any": ["prod_deploy", "db_migration", "secret_rotation", "delete_resource"]},
+        "workflow": "high-risk"
+      },
+      {
+        "id": "high-risk-level",
+        "when": {"risk_level_any": ["high", "critical", "l0", "l1"]},
+        "workflow": "high-risk"
+      },
+      {
+        "id": "feature-work",
+        "when": {"task_type_any": ["feature", "new_feature", "migration"], "changed_files_min": 6},
+        "workflow": "feature"
+      },
+      {
+        "id": "trivial-work",
+        "when": {"task_type_any": ["docs", "typo", "config"], "risk_level_any": ["low", "trivial"]},
+        "workflow": "trivial"
+      }
+    ]
+  }
+}

@@ -1,5 +1,30 @@
 # Changelog
 
+## [2.0.0] - 2026-08-14
+
+### Added
+
+- Executable Harness Runtime in `runtime/` with graph loading, dynamic routing, TaskState helpers, policy helpers, trace/replay, and evidence-based gates.
+- Machine-readable graph definitions for `trivial`, `normal`, `feature`, and `high-risk` workflows, including rollback, checkpoint/resume, and feature fan-out/fan-in.
+- Unified `TaskState` schema at `runtime/schema/task_state.schema.json`.
+- Feature memory layout and templates for `TECH_SPEC.md`, `subtasks.json`, `state.json`, evidence, reports, checkpoints, and timeline.
+- `rules/policies.yaml` as the machine-readable policy source, including side-effect approval policy.
+- Real executable gate wrappers for spec, design, risk, code style, security, review pass, test coverage, and knowledge stale checks.
+- Repository Map L1/L2/L3 structure under `assets/project-wiki/` plus stale detector.
+- Runtime docs, migration docs, release notes, unit tests, fixtures, and `scripts/self-check.py`.
+
+### Changed
+
+- Upgraded `config/harness.yaml` from a human explanation file to machine-readable JSON-compatible YAML.
+- Updated `README.md` and `SKILL.md` for v2.0.0 Runtime usage.
+- Updated PM Dispatcher, Risk Controller, Code Reviewer, and Project Recorder agent docs for runtime responsibilities.
+- Reviewer policy now explicitly forbids inheriting Developer reasoning or chat history.
+
+### Compatibility
+
+- Existing Rule / Skill / Agent / Workflow / Script / MCP / Asset layout remains intact.
+- Existing Markdown workflows remain human guidance; executable routing is now in `runtime/graphs/*.yaml`.
+
 本文件记录 white-harness-engineering 的版本演进，遵循「全程追溯」原则。
 
 ## [1.2.2] - 2026-08-06

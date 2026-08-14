@@ -1,0 +1,13 @@
+{
+  "version": "2.0.0",
+  "level": "L3",
+  "apis": [
+    {
+      "route": "METHOD /example",
+      "owner_module": "example",
+      "handler": "src/example",
+      "tests": [],
+      "wiki": "assets/project-wiki/modules/example.md"
+    }
+  ]
+}

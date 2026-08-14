@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Executable SPEC gate wrapper."""
+"""Executable security gate wrapper."""
 
 from pathlib import Path
 import sys
@@ -11,4 +11,4 @@ from runtime.gates import gate_cli
 
 
 if __name__ == "__main__":
-    sys.exit(gate_cli("check-spec"))
+    sys.exit(gate_cli("check-security"))

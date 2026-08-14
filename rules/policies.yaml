@@ -1,0 +1,64 @@
+{
+  "version": "2.0.0",
+  "policy_source": "machine_readable_yaml",
+  "rule_levels": {
+    "L0": {"default_action": "BLOCK", "requires_human_approval": true},
+    "L1": {"default_action": "FAIL", "requires_human_approval": false},
+    "L2": {"default_action": "WARN", "requires_human_approval": false},
+    "L3": {"default_action": "NOTE", "requires_human_approval": false}
+  },
+  "policies": [
+    {
+      "id": "SEC-001",
+      "title": "No secrets in repository content",
+      "scope": ["code", "config", "docs"],
+      "severity": "L0",
+      "condition": {"hardcoded_secret": true},
+      "action": {"gate_status": "BLOCK", "rotate_secret": true}
+    },
+    {
+      "id": "CTX-001",
+      "title": "Reviewer clean-context isolation",
+      "scope": ["review"],
+      "severity": "L1",
+      "condition": {"reviewer_inherits_developer_reasoning": true},
+      "action": {"gate_status": "FAIL", "restart_review_context": true}
+    },
+    {
+      "id": "EVD-001",
+      "title": "No Evidence, No Pass",
+      "scope": ["gate"],
+      "severity": "L1",
+      "condition": {"pass_without_evidence": true},
+      "action": {"gate_status": "FAIL"}
+    },
+    {
+      "id": "MEM-001",
+      "title": "Feature memory required for feature and high-risk graphs",
+      "scope": ["feature", "high-risk"],
+      "severity": "L1",
+      "condition": {"missing_task_state_or_subtasks": true},
+      "action": {"gate_status": "FAIL", "create_memory_layout": true}
+    },
+    {
+      "id": "WIKI-001",
+      "title": "Repository map must not be stale",
+      "scope": ["project-wiki"],
+      "severity": "L2",
+      "condition": {"tracked_source_hash_changed": true},
+      "action": {"gate_status": "WARN", "refresh_wiki": true}
+    }
+  ],
+  "side_effect_policy": {
+    "read_code": {"human_approval_required": false},
+    "run_tests": {"human_approval_required": false},
+    "modify_code": {"human_approval_required": false},
+    "create_local_file": {"human_approval_required": false},
+    "git_commit": {"human_approval_required": true},
+    "git_push": {"human_approval_required": true},
+    "db_migration": {"human_approval_required": true},
+    "prod_deploy": {"human_approval_required": true},
+    "delete_resource": {"human_approval_required": true},
+    "secret_rotation": {"human_approval_required": true}
+  }
+}

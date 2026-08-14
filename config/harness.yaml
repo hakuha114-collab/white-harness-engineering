@@ -1,111 +1,80 @@
-# Harness 全局管控配置
-
-## 基本配置
-
-```yaml
-harness:
-  name: white-harness-engineering
-  version: 1.2.2
-  description: 基于 Harness Engineering 的 AI 工程管控底座
-
-  # 全局开关
-  enabled: true
-  
-  # 审计日志
-  audit:
-    enabled: true
-    storage: assets/audit-logs/
-    retention_days: 90
-
-  # 门禁策略
-  gate:
-    # 门禁不通过时的默认行为
-    on_fail: rollback  # rollback | block | warn
-    # 最大回退次数
-    max_rollback: 3
-    # 超过回退次数后的行为
-    on_max_rollback: human_intervention  # human_intervention | auto_skip
-
-  # Agent 配置
-  agents:
-    # 全局超时（分钟）
-    default_timeout: 60
-    # 各 Agent 超时覆盖
-    timeout_overrides:
-      pm-dispatcher: 5
-      requirement-analyzer: 30
-      solution-designer: 60
-      risk-controller: 30
-      code-developer: 120
-      code-reviewer: 60
-      test-validator: 90
-
-  # Rule 约束级别
-  rule_levels:
-    L0:
-      action: terminate    # 终止流程
-      notify: [tech_lead, security]
-    L1:
-      action: rollback     # 回退修复
-      notify: [developer]
-    L2:
-      action: warn         # 标记警告
-      notify: []
-    L3:
-      action: note         # 仅记录
-      notify: []
-
-  # 测试覆盖率标准
-  coverage:
-    core_logic:
-      lines: 80
-      branches: 70
-      functions: 90
-    utility:
-      lines: 90
-      branches: 80
-      functions: 95
-    api_controller:
-      lines: 70
-      branches: 60
-      functions: 80
-    config:
-      lines: 50
-
-  # 部署策略
-  deploy:
-    staging:
-      strategy: rolling
-      auto_promote: false
-    production:
-      strategy: canary
-      canary_percentage: [10, 50, 100]
-      approval_required: true
-      auto_rollback_on_failure: true
-```
-
-## 扩展配置
-
-项目可在本文件基础上扩展自定义配置，例如：
-
-```yaml
-# 项目自定义配置示例
-harness:
-  custom:
-    # 项目特定的 Rule
-    custom_rules:
-      - rules/project-specific/naming-convention.md
-    
-    # 项目特定的 Skill
-    custom_skills:
-      - skills/custom-api-generation/
-    
-    # 项目特定的 Agent
-    custom_agents:
-      - agents/custom-devops/
-    
-    # MCP 集成
-    mcp_integrations:
-      - mcp/git-integration.md
-      - mcp/ci-cd-integration.md
-```
+{
+  "harness": {
+    "name": "white-harness-engineering",
+    "version": "2.0.0",
+    "runtime": {
+      "enabled": true,
+      "state_root": ".harness",
+      "schema": "runtime/schema/task_state.schema.json",
+      "graph_dir": "runtime/graphs",
+      "default_workflow": "normal",
+      "trace_file": "timeline.ndjson",
+      "checkpoint_dir": "checkpoints"
+    },
+    "audit": {
+      "enabled": true,
+      "storage": ".harness/audit",
+      "retention_days": 90,
+      "trace_replay_required": true
+    },
+    "gate": {
+      "principle": "No Evidence, No Pass",
+      "result_schema_version": "2.0.0",
+      "exit_codes": {
+        "PASS": 0,
+        "FAIL": 1,
+        "WARN": 2,
+        "BLOCK": 3
+      },
+      "on_fail": "rollback",
+      "max_rollback": 3,
+      "on_max_rollback": "human_intervention"
+    },
+    "reviewer": {
+      "clean_context": true,
+      "inherit_developer_reasoning": false,
+      "inherit_chat_history": false,
+      "allowed_inputs": [
+        "SPEC.md",
+        "TECH_SPEC.md",
+        "diff",
+        "relevant_code",
+        "test_results",
+        "evidence",
+        "rules",
+        "policies"
+      ]
+    },
+    "budget": {
+      "max_tokens": 150000,
+      "max_tool_calls": 100,
+      "max_rollbacks": 3,
+      "max_wall_minutes": 240
+    },
+    "agents": {
+      "default_timeout_minutes": 60,
+      "timeout_overrides_minutes": {
+        "pm-dispatcher": 5,
+        "requirement-analyzer": 30,
+        "solution-designer": 60,
+        "risk-controller": 30,
+        "code-developer": 120,
+        "code-reviewer": 60,
+        "test-validator": 90,
+        "project-recorder": 15
+      }
+    },
+    "rule_levels": {
+      "L0": {"action": "terminate", "notify": ["tech_lead", "security"]},
+      "L1": {"action": "rollback", "notify": ["developer"]},
+      "L2": {"action": "warn", "notify": []},
+      "L3": {"action": "note", "notify": []}
+    },
+    "coverage": {
+      "core_logic": {"lines": 80, "branches": 70, "functions": 90},
+      "utility": {"lines": 90, "branches": 80, "functions": 95},
+      "api_controller": {"lines": 70, "branches": 60, "functions": 80},
+      "config": {"lines": 50, "branches": 0, "functions": 0}
+    }
+  }
+}

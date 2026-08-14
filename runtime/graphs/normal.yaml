@@ -1,0 +1,34 @@
+{
+  "id": "normal",
+  "version": "2.0.0",
+  "description": "Default graph for ordinary bug fixes and refactors.",
+  "nodes": {
+    "start": {"agent": "pm-dispatcher", "checkpoint": true},
+    "plan": {"agent": "requirement-analyzer", "gate": "check-spec", "checkpoint": true},
+    "implement": {"agent": "code-developer", "checkpoint": true},
+    "style_gate": {"gate": "check-code-style"},
+    "security_gate": {"gate": "check-security"},
+    "review": {"agent": "code-reviewer", "gate": "check-review-pass", "clean_context": true},
+    "test": {"agent": "test-validator", "gate": "check-test-coverage"},
+    "deliver": {"agent": "project-recorder", "checkpoint": true}
+  },
+  "edges": [
+    {"from": "start", "on": "PASS", "to": "plan"},
+    {"from": "plan", "on": "PASS", "to": "implement"},
+    {"from": "plan", "on": "WARN", "to": "implement"},
+    {"from": "plan", "on": "FAIL", "to": "plan"},
+    {"from": "implement", "on": "PASS", "to": "style_gate"},
+    {"from": "style_gate", "on": "PASS", "to": "security_gate"},
+    {"from": "style_gate", "on": "WARN", "to": "security_gate"},
+    {"from": "style_gate", "on": "FAIL", "to": "implement"},
+    {"from": "security_gate", "on": "PASS", "to": "review"},
+    {"from": "security_gate", "on": "FAIL", "to": "implement"},
+    {"from": "security_gate", "on": "BLOCK", "to": "human_approval"},
+    {"from": "review", "on": "PASS", "to": "test"},
+    {"from": "review", "on": "FAIL", "to": "implement"},
+    {"from": "test", "on": "PASS", "to": "deliver"},
+    {"from": "test", "on": "WARN", "to": "deliver"},
+    {"from": "test", "on": "FAIL", "to": "implement"},
+    {"from": "deliver", "on": "PASS", "to": "done"}
+  ]
+}

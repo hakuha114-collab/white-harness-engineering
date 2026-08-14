@@ -1,0 +1,76 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/hakuha114-collab/white-harness-engineering/runtime/schema/task_state.schema.json",
+  "title": "White Harness 2.0 TaskState",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "task_id",
+    "goal",
+    "workflow_id",
+    "current_node",
+    "status",
+    "artifacts",
+    "evidence",
+    "subtasks",
+    "rollback_count",
+    "human_approvals",
+    "budget",
+    "audit"
+  ],
+  "properties": {
+    "schema_version": {"const": "2.0.0"},
+    "task_id": {"type": "string", "minLength": 1},
+    "goal": {"type": "string", "minLength": 1},
+    "workflow_id": {"enum": ["trivial", "normal", "feature", "high-risk"]},
+    "current_node": {"type": "string"},
+    "status": {"enum": ["READY", "RUNNING", "DONE", "FAILED", "BLOCKED"]},
+    "risk_level": {"type": "string"},
+    "artifacts": {"type": "object"},
+    "evidence": {"type": "object"},
+    "subtasks": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "title", "status"],
+        "properties": {
+          "id": {"type": "string"},
+          "title": {"type": "string"},
+          "type": {"type": "string"},
+          "depends_on": {"type": "array", "items": {"type": "string"}},
+          "files": {"type": "array", "items": {"type": "string"}},
+          "acceptance": {"type": "array", "items": {"type": "string"}},
+          "status": {"enum": ["TODO", "IN_PROGRESS", "DONE", "BLOCKED"]}
+        }
+      }
+    },
+    "rollback_count": {"type": "integer", "minimum": 0},
+    "human_approvals": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["effect", "status"],
+        "properties": {
+          "effect": {"type": "string"},
+          "status": {"enum": ["REQUESTED", "APPROVED", "REJECTED"]},
+          "approved_by": {"type": "string"},
+          "approved_at": {"type": "string"}
+        }
+      }
+    },
+    "budget": {
+      "type": "object",
+      "required": ["max_tokens", "max_tool_calls", "max_rollbacks", "max_wall_minutes"],
+      "properties": {
+        "max_tokens": {"type": "integer", "minimum": 1},
+        "max_tool_calls": {"type": "integer", "minimum": 1},
+        "max_rollbacks": {"type": "integer", "minimum": 0},
+        "max_wall_minutes": {"type": "integer", "minimum": 1}
+      }
+    },
+    "audit": {
+      "type": "object",
+      "required": ["created_at", "updated_at", "trace", "checkpoint_dir"]
+    }
+  }
+}
