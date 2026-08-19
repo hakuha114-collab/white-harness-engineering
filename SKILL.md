@@ -1,6 +1,6 @@
 ---
 name: white-harness-engineering
-version: 2.0.1
+version: 2.1.0
 description: AI 研发全流程工程管控框架。触发：写/审 SPEC、代码审查、写测试、修 Bug、重构、部署、项目初始化，或需强制 AI 开发遵循先思考再编码、简洁优先、精准修改、目标驱动验证。v2.0.0 增加 Executable Graph、TaskState、Evidence Gate、Clean-context Reviewer、Policy YAML 和项目记忆。
 agent_created: true
 ---
@@ -57,6 +57,8 @@ scripts/harness_runtime.py          Runtime CLI
 scripts/check-*/                    Evidence gate scripts
 assets/templates/feature-memory/    TECH_SPEC, subtasks, state templates
 assets/project-wiki/                L1/L2/L3 repository map
+mcp/codegraph.md                  CodeGraph 代码图对接（可选增强：影响面/调用链）
+mcp/code-review-graph.md          code-review-graph 审查图谱对接（可选增强：diff/PR 审查上下文）
 ```
 
 ## Gate Contract

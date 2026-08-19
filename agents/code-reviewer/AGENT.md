@@ -47,6 +47,13 @@ The review cannot pass without durable evidence:
 - Test result or coverage artifact.
 - Security and style gate results when code changed.
 - Review report with reviewer identity and PASS/FAIL conclusion.
+- Review context & impact radius evidence（可选增强）— 先按 `mcp/code-review-graph.md` 的「使用前置检测」确认服务可用且项目已 `build`；满足后用：
+  `get_review_context_tool` 取本次 diff/PR 的审查上下文、`get_impact_radius_tool` 取波及半径、`get_affected_flows_tool` 验受影响流程。
+  未通过检测则退回 Read/Grep/Glob，并在报告标注「code-review-graph 未接入」。
+- Call-chain consistency evidence（可选增强）— 先按 `mcp/codegraph.md` 的「使用前置检测」确认服务可用且项目已 `codegraph init`；满足后用：
+  `codegraph callers <symbol>` / `codegraph callees <symbol>` 验证 diff 的调用边是否符合意图。
+  未通过检测则用 Read/Grep 手工追调用链，并在报告标注「CodeGraph 未接入」。
+- 选型路由：输入是符号 → CodeGraph；输入是 diff/PR → code-review-graph。两者均未接入时走原有 heuristic。详见 `mcp/code-review-graph.md`。
 
 ## Outputs
 

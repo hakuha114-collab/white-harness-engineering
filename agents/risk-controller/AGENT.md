@@ -45,3 +45,13 @@ Risk reports must be durable artifacts and checked by:
 ```bash
 python scripts/check-risk/check_risk.py <risk-report.md> --json
 ```
+
+### Code intelligence (optional but recommended)
+
+先按 `mcp/codegraph.md` 的「使用前置检测」确认服务可用且项目已 `codegraph init`；满足后优先用它取影响面证据，替代手工调用图绘制：
+
+- `codegraph impact <symbol>` → affected symbols/files; attach the output as impact evidence in the risk report.
+- `codegraph affected` → test files that must be re-run for the change; list them under mitigation.
+- This makes the risk gate evidence queryable, not asserted.
+
+选型路由：影响面（符号级、含受影响测试清单）优先 CodeGraph `impact`；若已按 `mcp/code-review-graph.md` 的 Preflight 接入，**diff/PR 级的波及半径**可补 `get_impact_radius_tool`。两者均未接入时走原有 heuristic。详见 `mcp/code-review-graph.md`。

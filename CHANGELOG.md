@@ -1,5 +1,37 @@
 # Changelog
 
+## [2.1.0] - 2026-08-19
+
+### Added
+- 新增可选审查图谱契约 `mcp/code-review-graph.md`：接入 code-review-graph（[@tirth8205/code-review-graph](https://github.com/tirth8205/code-review-graph)，Python 包 v2.3.3），含能力清单（实测 30 个 MCP 工具）、双端接入（WorkBuddy `~/.workbuddy/mcp.json` 6 个按项目根 `cwd` 区分的实例 / Codex `config.toml` 镜像）、Preflight 检测、与 CodeGraph 的选型路由表
+- `mcp/codegraph.md` 顶部新增「与 code-review-graph 的分工（一文读懂选哪个）」：输入是符号 → CodeGraph，输入是 diff/PR → code-review-graph
+- `agents/code-reviewer/AGENT.md` 的「Required Evidence」补 `get_review_context_tool` / `get_impact_radius_tool` / `get_affected_flows_tool` 审查上下文证据（Preflight 检测后使用），并标注选型路由
+- `agents/risk-controller/AGENT.md` 的「Code intelligence」补 code-review-graph 的 `get_impact_radius_tool` 作为 diff/PR 级波及半径补充，标注选型路由
+- SKILL.md Core Files 增加 `mcp/codegraph.md` 与 `mcp/code-review-graph.md` 两条可选增强契约
+- 版本三处同步 2.0.4 → 2.1.0（双图谱可选能力：CodeGraph 理解 / code-review-graph 审查）
+
+## [2.0.4] - 2026-08-18
+
+### Fixed
+- `mcp/codegraph.md` 能力清单与 env 对齐 CodeGraph v1.5.0 真实工具集：移除不存在的 `codegraph_affected` / `codegraph_query`（实测 `tools/list` 仅返回 `explore,callers,callees,impact` 四个），`CODEGRAPH_MCP_TOOLS` 修正为 `explore,callers,callees,impact`（WorkBuddy `mcp.json` 与 Codex `config.toml` 同步修正）
+
+## [2.0.3] - 2026-08-18
+
+### Added
+- `mcp/codegraph.md` 新增「使用前置检测（Preflight）」小节：Agent 调用任何 `codegraph_*` 工具前必须先探测（1）MCP 服务是否可用（2）目标项目是否已 `codegraph init`（存在 `.codegraph/`），任一不满足则显式退回 Read/Grep/Glob 并在报告标注，不靠盲目试错
+- `agents/risk-controller/AGENT.md` 与 `agents/code-reviewer/AGENT.md` 的「when available」措辞改为先引用 Preflight 检测再使用
+- 修正 `mcp/codegraph.md` WorkBuddy 配置示例：MCP 服务实际为隐藏子命令 `serve --mcp`，`args` 须为 `["serve","--mcp"]`（此前 `args: []` 会导致 MCP 起不来）
+- 版本三处同步 2.0.2 → 2.0.3（CodeGraph 接入健壮性增强）
+
+## [2.0.2] - 2026-08-18
+
+### Added
+
+- 新增可选代码智能契约 `mcp/codegraph.md`：接入本地代码知识图谱 CodeGraph（[@colbymchenry/codegraph](https://www.npmjs.com/package/@colbymchenry/codegraph)），含能力清单、MCP 工具启用（`CODEGRAPH_MCP_TOOLS`）、双端接入（Codex `codegraph install` 自动 / WorkBuddy 手动 `~/.workbuddy/mcp.json`）、隐私与依赖、与门禁的对应关系
+- Risk Gate 文档 `agents/risk-controller/AGENT.md` 增加证据指引：优先用 `codegraph impact` 取影响面、`codegraph affected` 取必跑测试
+- Review Pass 文档 `agents/code-reviewer/AGENT.md` 增加证据指引：优先用 `codegraph callers` / `codegraph callees` 验证调用链一致性
+- 版本三处同步 2.0.1 → 2.0.2（可选能力新增）
+
 ## [2.0.1] - 2026-08-14
 
 ### Changed
