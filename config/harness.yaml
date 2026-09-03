@@ -1,7 +1,7 @@
 {
   "harness": {
     "name": "white-harness-engineering",
-    "version": "2.2.0",
+    "version": "2.2.1",
     "runtime": {
       "enabled": true,
       "state_root": ".harness",

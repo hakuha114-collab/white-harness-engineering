@@ -1,7 +1,7 @@
 ---
 name: white-harness-engineering
-version: 2.1.0
-description: AI 研发全流程工程管控框架。触发：写/审 SPEC、代码审查、写测试、修 Bug、重构、部署、项目初始化，或需强制 AI 开发遵循先思考再编码、简洁优先、精准修改、目标驱动验证。v2.0.0 增加 Executable Graph、TaskState、Evidence Gate、Clean-context Reviewer、Policy YAML 和项目记忆。
+version: 2.2.1
+description: AI 研发全流程工程管控框架。触发：写/审 SPEC、代码审查、写测试、修 Bug、重构、部署、项目初始化，或需强制 AI 开发遵循先思考再编码、简洁优先、精准修改、目标驱动验证。v2.0.0 增加 Executable Graph、TaskState、Evidence Gate、Clean-context Reviewer、Policy YAML 和项目记忆；v2.2.1 提供 Git 拉取后影响面/拓扑分析路由（git-impact-topology 工作流、独立 skill white-git-topology）。
 agent_created: true
 ---
 
@@ -82,6 +82,8 @@ workflows/git-impact-topology.md  Git 拉取后影响面/拓扑一键工作流�
 | Review code | `agents/code-reviewer/`, clean-context policy, `scripts/check-review-pass/check_review_pass.py` |
 | Write or validate tests | `skills/write-test/SKILL.md`, `scripts/check-test-coverage/check_test_coverage.py` |
 | Maintain project memory | `agents/project-recorder/`, `.harness/features/<TASK_ID>/`, `assets/project-wiki/` |
+| Git 拉取后影响面/拓扑（git-impact-topology） | `workflows/git-impact-topology.md`（一键 detect→radius→flows→visualize）；独立 skill `white-git-topology` 亦可单独调用 |
+| 路由到独立 skill white-git-topology | 调用 `white-git-topology` skill（Git 影响拓扑分析，基于 code-review-graph MCP） |
 
 ## Verification
 

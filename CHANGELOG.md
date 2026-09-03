@@ -1,5 +1,14 @@
 # Changelog
 
+## [2.2.1] - 2026-09-03
+
+### Fixed
+- 修正 2.2.0 漏落：SKILL.md 实际未写入 `git-impact-topology` Intent Routing 触发项（仅 harness.yaml / CHANGELOG 升到 2.2.0），导致已发布的 2.2.0 无法真正路由 git 影响拓扑。本次补齐该行。
+
+### Added
+- Intent Routing 新增 `white-git-topology` 交叉引用项：white-harness 上下文可路由到独立 skill `white-git-topology` 做 Git 拉取后影响面/拓扑分析（基于 code-review-graph MCP）。
+- 版本三处同步 2.2.0 → 2.2.1。
+
 ## [2.2.0] - 2026-09-03
 
 ### Added
