@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.2.0] - 2026-09-03
+
+### Added
+- 新增独立工作流 `workflows/git-impact-topology.md`：Git 拉取后一键串联「变更检测（`detect_changes_tool`）→ 影响半径（`get_impact_radius_tool`）→ 受影响流程（`get_affected_flows_tool`）→ 拓扑图（`visualize`）」，产出影响面摘要 + D3 力导向拓扑图 + 高危点清单，并明确红线（本 workflow 不执行任何 git 命令，pull 由用户在其环境完成）
+- SKILL.md Intent Routing 新增 `git-impact-topology` 触发项（用户说"Git 影响拓扑 / git-impact-topology"即路由到该 workflow）；Core Files 与 `description` 同步补充触发词
+- 版本三处同步 2.1.0 → 2.2.0（Git 拉取后影响面/拓扑一键能力，复用已接入的 code-review-graph MCP 图谱）
+
 ## [2.1.0] - 2026-08-19
 
 ### Added

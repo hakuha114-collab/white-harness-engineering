@@ -59,6 +59,7 @@ assets/templates/feature-memory/    TECH_SPEC, subtasks, state templates
 assets/project-wiki/                L1/L2/L3 repository map
 mcp/codegraph.md                  CodeGraph 代码图对接（可选增强：影响面/调用链）
 mcp/code-review-graph.md          code-review-graph 审查图谱对接（可选增强：diff/PR 审查上下文）
+workflows/git-impact-topology.md  Git 拉取后影响面/拓扑一键工作流（detect→radius→flows→visualize）
 ```
 
 ## Gate Contract
